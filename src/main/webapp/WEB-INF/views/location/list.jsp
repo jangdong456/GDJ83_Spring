@@ -9,23 +9,29 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-	<h1>부서 리스트</h1>
+	<h1>지역정보 리스트</h1>
 	<div class = "row col-md-8">
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>부서번호</th>
-					<th>부서명</th>
-					<th>관리자</th>
+					<th>지역번호</th>
+					<th>거리주소</th>
+					<th>우편번호</th>
+					<th>도시이름</th>
+					<th>주</th>
+					<th>국가</th>
 				</tr>
 			</thead>
 			
 			<tbody>
 				<c:forEach items="${list}" var="dto">
 					<tr>
-						<td>${dto.department_id}</td>
-						<td>${dto.department_name}</td>
-						<td>${dto.manager_id}</td>
+						<td>${dto.location_id}</td>
+						<td>${dto.street_address}</td>
+						<td>${dto.postal_code}</td>
+						<td>${dto.city}</td>
+						<td>${dto.state_province}</td>
+						<td>${dto.country_id}</td>
 					</tr>			
 				</c:forEach>
 			
