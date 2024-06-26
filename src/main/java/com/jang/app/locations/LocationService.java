@@ -17,4 +17,15 @@ public class LocationService {
 		
 		return ar;
 	}
+	
+	
+	public LocationDTO getDetail(int location_id) throws Exception {
+		System.out.println("서비스");
+		LocationDTO ar = locationDAO.getDetail(location_id);
+		return ar;
+	}
+	
+	public int add(LocationDTO locationDTO) throws Exception {
+		return locationDAO.add(locationDTO);
+	}  
 }
