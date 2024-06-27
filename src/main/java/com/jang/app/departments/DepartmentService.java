@@ -1,6 +1,7 @@
 package com.jang.app.departments;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,8 @@ public class DepartmentService {
 		return departmentDAO.update(departmentDTO);
 	}
 	
+	public List<Map<String, Object>> getInfo() throws Exception{
+		return departmentDAO.getInfo();
+	}
 		
 }
