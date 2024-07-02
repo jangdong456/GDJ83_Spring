@@ -21,4 +21,13 @@ public class ProductService {
 		System.out.println("detail 서비스");
 	  	return  productDAO.detail(product_id);
 	}
+	
+	public int add(ProductDTO productDTO) throws Exception {
+		return productDAO.add(productDTO);
+	}
+	
+	public int delete(ProductDTO productDTO) throws Exception {
+		return productDAO.delete(productDTO);
+	}
+	
 }
