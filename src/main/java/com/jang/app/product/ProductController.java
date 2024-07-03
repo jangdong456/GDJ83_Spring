@@ -1,4 +1,4 @@
-package com.jang.app.proudct;
+package com.jang.app.product;
 
 import java.util.List;
 
@@ -17,16 +17,13 @@ public class ProductController {
 	
 	@RequestMapping("list")
 	public void getList(Model model)throws Exception {
-		
 		List<ProductDTO> ar =  productService.getList();
 
 		model.addAttribute("list", ar);
 	}
 	
 	@RequestMapping(value = "detail", method= RequestMethod.GET)
-	public String detail(Model model, int product_id) throws Exception {
-		System.out.println("TEST");
-		System.out.println(product_id);
+	public String detail(Model model, ProductDTO product_id) throws Exception {
 		
 		ProductDTO dto = productService.detail(product_id);
 
@@ -59,7 +56,7 @@ public class ProductController {
 	@RequestMapping("delete")
 	public String delete(ProductDTO productDTO, Model model) throws Exception {
 		
-		int result = productService .delete(productDTO);
+		int result = productService.delete(productDTO);
 		
 		String url = "commons/message";
 		if (result > 0 ) {
@@ -71,8 +68,19 @@ public class ProductController {
 		return url;
 	}
 	
+	@RequestMapping("update")
+	public void update() throws Exception {
+		
+	}
 	
-	
+	@RequestMapping(value = "update", method= RequestMethod.POST)
+	public String update2(ProductDTO productDTO) throws Exception {
+		int result = productService.update(productDTO);
+		
+		String url = "redirect:list";
+
+		return url;
+	}
 	
 }
 

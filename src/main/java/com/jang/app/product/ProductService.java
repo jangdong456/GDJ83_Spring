@@ -1,4 +1,4 @@
-package com.jang.app.proudct;
+package com.jang.app.product;
 
 import java.util.List;
 
@@ -12,12 +12,11 @@ public class ProductService {
 	private ProductDAO productDAO;
 	
 	public List<ProductDTO> getList() throws Exception {
-		System.out.println("서비스");
 		return productDAO.getList();
 
 	}
 	
-	public ProductDTO detail(int product_id) throws Exception {
+	public ProductDTO detail(ProductDTO product_id) throws Exception {
 		System.out.println("detail 서비스");
 	  	return  productDAO.detail(product_id);
 	}
@@ -28,6 +27,10 @@ public class ProductService {
 	
 	public int delete(ProductDTO productDTO) throws Exception {
 		return productDAO.delete(productDTO);
+	}
+	
+	public int update(ProductDTO productDTO) throws Exception {
+		return productDAO.update(productDTO);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.jang.app.proudct;
+package com.jang.app.product;
 
 public class ProductDTO {
 

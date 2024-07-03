@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  xml 태그의 스키마가 있어야함 -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<!--  mapper의 구분은 namespace값으로 구분 중복x -->
+	<!--  namespace 다른애랑 중복되면 안되니까 명시해준다 -->
+	<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
+	<mapper namespace ="com.jang.app.product.ProductDAO">
+		<select id="getList" resultType="com.jang.app.product.ProductDTO">
+			SELECT * FROM PRODUCT
+		</select>
+		
+		<!--  매개변수 받아야 할 때 : parameterType="패키지명.클래스명" 
+		  #{product_id}
+		  결과물을 어느타입에 담아서 할거냐 : resultType=""
+		-->
+		<select id="detail" resultType="com.jang.app.product.ProductDTO" parameterType="com.jang.app.product.ProductDTO">
+			  SELECT * FROM PRODUCT WHERE PRODUCT_ID = #{product_id}
+		</select>
+		
+		<select id = "add" parameterType="com.jang.app.product.ProductDTO">
+			INSERT INTO PRODUCT
+			VALUES(BANK_SEQ.NEXTVAL, #{product_type}, #{product_rate}, #{product_detail})
+		</select>
+		
+		<select id="delete" parameterType="com.jang.app.product.ProductDTO">
+			DELETE PRODUCT WHERE PRODUCT_ID = #{product_id}
+		</select>
+		
+		<select id="update" parameterType="com.jang.app.product.ProductDTO">
+			UPDATE PRODUCT SET PRODUCT_TYPE=#{product_type}, PRODUCT_RATE =#{product_rate}, PRODUCT_DETAIL=#{product_detail} 
+			WHERE PRODUCT_ID = #{product_id}
+		</select>
+
+	</mapper>
+

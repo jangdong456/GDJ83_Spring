@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  <select id=""></select> id값에 공백있으면 무조건 에러 -->
+  <!--  namespace는 중복되는 값 안됨 | 아무것도 안들어 가있어도 안됨 -->
+  <mapper namespace ="sampleMapper">
+  	
+  </mapper>
+  
