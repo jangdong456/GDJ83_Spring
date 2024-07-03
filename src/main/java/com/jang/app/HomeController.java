@@ -33,9 +33,10 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		
 
-		robot.getRa().info();
-		robot.getLa().info();
+//		robot.getRa().info();
+//		robot.getLa().info();
 		
+
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -44,6 +45,9 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		
+		robot.getLeftArm().info();
+		robot.getRightArm().info();
 		
 		return "index";
 	}

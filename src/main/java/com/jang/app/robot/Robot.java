@@ -1,36 +1,55 @@
 package com.jang.app.robot;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component // new Robot();
 public class Robot {
 	
+	private String company;
+	private int age;
 	// 같은 타입이 여러개 라면 변수명을 찾아서 실행시켜준다.  | bean
 	
-	@Autowired // set.RightArm 주입시켜줌
-	@Qualifier("ra")
+public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+//	@Autowired // set.RightArm 주입시켜줌
+//	@Qualifier("ra")
 	private Arm rightArm;
 	
-	@Autowired
-	@Qualifier("la")
+//	@Autowired
+//	@Qualifier("la")
 	private Arm leftArm;
 
-	public Arm getRa() {
-		return ra;
+	public Arm getRightArm() {
+		return rightArm;
 	}
 
-	public void setRa(Arm ra) {
-		this.ra = ra;
+	public void setRightArm(Arm rightArm) {
+		this.rightArm = rightArm;
 	}
 
-	public Arm getLa() {
-		return la;
+	public Arm getLeftArm() {
+		return leftArm;
 	}
 
-	public void setLa(Arm la) {
-		this.la = la;
+	public void setLeftArm(Arm leftArm) {
+		this.leftArm = leftArm;
 	}
-	
+
+
+
+
 }
