@@ -9,17 +9,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.jang.app.util.DBconnetion;
+import com.jang.app.util.DBConnection;
+
 
 @Repository
 public class ProductDAO {
 	
 	@Autowired
-	private DBconnetion dbconnetion;
+	private DBConnection dbconnetion;
 	
 	public List<ProductDTO> getList() throws Exception {
-		System.out.println("dao");
-		Connection con =  dbconnetion.getConnertion();
+		System.out.println("dao"); 
+		Connection con =  dbconnetion.getConnection();
 			
 		String sql = "SELECT * FROM PRODUCT";
 		
@@ -49,15 +50,15 @@ public class ProductDAO {
 	public ProductDTO detail(int product_id) throws Exception {
 		System.out.println("dao");
 		
-		 Connection con = dbconnetion.getConnertion();
+		 Connection con = dbconnetion.getConnection();
 		 
-		 String sql = "SELET * FROM PRODUCT WHERE PRODUCT_ID = ?";
-		 
+		 String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = ?";
+		
 		 PreparedStatement st = con.prepareStatement(sql);
 		 
 		 st.setInt(1, product_id);
 		 
-		 ResultSet rs =st.executeQuery();
+		 ResultSet rs = st.executeQuery();
 		 
 		 ProductDTO dto = null;
 		 
@@ -74,22 +75,20 @@ public class ProductDAO {
 		 con.close();
 		 
 		 return dto;
-		
 	}
 	
 	public int add(ProductDTO productDTO) throws Exception {
-		System.out.println("add dao");
-		Connection con = dbconnetion.getConnertion();
+		Connection con = dbconnetion.getConnection();
 		
-		String sql = "INSERT INTO PRODUCT "
-				+ " (PRODUCT_ID, PRODUCT_TYPE, PRODUCT_RATE, PRODUCT_DETAIL)"
-				+ " VALUES (PRODUCT_SEQ.NEXTVAL, ?, ?)"; 
+		String sql = "INSERT INTO PRODUCT"
+				+ " (PRODUCT_ID, PRODUCT_TYPE, PRODUCT_RATE, PRODUCT_DETAIL"
+				+ " VALUES(BANK_SEQ.NEXTVAL, ?, ?, ?)";
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		
-
 		st.setString(1, productDTO.getProduct_type());
 		st.setDouble(2, productDTO.getProduct_rate());
+		st.setString(3, productDTO.getProduct_detail());
 		
 		int result = st.executeUpdate();
 		
@@ -98,6 +97,22 @@ public class ProductDAO {
 		
 		return result;
 	}
-
+	
+	public int delete(ProductDTO productDTO) throws Exception {
+		Connection con = dbconnetion.getConnection();
+		
+		String sql = "DELETE DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, productDTO.getProduct_id());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
 	
 }

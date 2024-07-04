@@ -12,22 +12,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="row">
-				<h1>상품등록</h1>			
+				<h1>수정폼</h1>			
 			</div>
-			<form action="./add" method="post">
+			<form action="./update" method="post">
+				<input type="hidden" name= "product_id" value= "${dto.product_id}">
+			
 			  <div class="mb-3">
 			    <label for="product_type" class="form-label">상품명</label>
-			    <input type="text" class="form-control" id="product_type" name="product_type">
+			    <input type="text" value="${dto.product_type}" class="form-control" id="product_type" name="product_type">
 			  </div>
 			  
 			  <div class="mb-3">
 			    <label for="product_rate" class="form-label">이자율</label>
-			    <input type="text" class="form-control" id="product_rate" name="product_rate">
+			    <input type="text" value="${dto.product_rate}" class="form-control" id="product_rate" name="product_rate">
 			  </div>
 			  
 			  <div class="mb-3">
 			    <label for="product_detail" class="form-label">상품설명</label>
-			    <input type="text" class="form-control" id="product_detail" name="product_detail">
+			    <input type="text" value="${dto.product_detail}" class="form-control" id="product_detail" name="product_detail">
 			  </div>
 
 			  <button type="submit" class="btn btn-primary">등록</button>
