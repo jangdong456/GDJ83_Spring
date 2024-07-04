@@ -69,18 +69,29 @@ public class ProductController {
 	}
 	
 	@RequestMapping("update")
-	public void update() throws Exception {
+	public String update(ProductDTO productDTO, Model model) throws Exception {
+
+		ProductDTO dto = productService.detail(productDTO);
+			
+		String url = "commons/message";
 		
+		if(dto != null) {
+			model.addAttribute("dto", dto);
+			url = "product/update";
+		} else {
+			model.addAttribute("result", "없는 부서");
+			model.addAttribute("url", "list");
+		}
+		return url;
 	}
 	
 	@RequestMapping(value = "update", method= RequestMethod.POST)
 	public String update2(ProductDTO productDTO) throws Exception {
 		int result = productService.update(productDTO);
 		
-		String url = "redirect:list";
+		String url = "redirect:./list";
 
 		return url;
 	}
-	
 }
 

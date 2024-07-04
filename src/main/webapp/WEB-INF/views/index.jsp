@@ -14,6 +14,12 @@
 
 <div class="container-fluid mt-5">
 	<div class="row justify-content-center">
+		
+		<c:if test="${not empty member}">
+		<div>
+			<h3>${member.member_id} 환영합니다</h3>
+		</div>
+		</c:if>
 		<div id="carouselExampleAutoplaying" class="carousel slide col-md-6" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--  Mybatis 태그들을 설정할수 있는 스키마이다. -->
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <!--  Type 단축해주는 코드 작성 -->
+ <configuration>
+ 	<typeAliases>
+ 		<!--  Aliases : 별칭 -->
+ 		<typeAlias type="com.jang.app.product.ProductDTO" alias="ProductDTO"/>
+ 		<typeAlias type="java.util.Map" alias="Map"/>
+ 		<typeAlias type="com.jang.app.members.MemberDTO" alias="MemberDTO"/>
+ 	</typeAliases>
+ 	
+
+ </configuration>

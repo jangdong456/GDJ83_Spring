@@ -7,33 +7,44 @@
 	
 	<!--  mapper의 구분은 namespace값으로 구분 중복x -->
 	<!--  namespace 다른애랑 중복되면 안되니까 명시해준다 -->
-	<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
+	
 	<mapper namespace ="com.jang.app.product.ProductDAO">
-		<select id="getList" resultType="com.jang.app.product.ProductDTO">
+	
+		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
+		<select id="getList" resultType="ProductDTO">
 			SELECT * FROM PRODUCT
 		</select>
 		
 		<!--  매개변수 받아야 할 때 : parameterType="패키지명.클래스명" 
 		  #{product_id}
 		  결과물을 어느타입에 담아서 할거냐 : resultType=""
+		  resultType : 은 select태그에만 있다.
+		  select의 결과물이 어떤든 resultType는 DTO로 할것
 		-->
-		<select id="detail" resultType="com.jang.app.product.ProductDTO" parameterType="com.jang.app.product.ProductDTO">
+		
+		<select id="detail" resultType="ProductDTO" parameterType="ProductDTO">
 			  SELECT * FROM PRODUCT WHERE PRODUCT_ID = #{product_id}
 		</select>
 		
-		<select id = "add" parameterType="com.jang.app.product.ProductDTO">
+		<insert id = "add" parameterType="ProductDTO">
+		<!--  MAP으로 받을시 key 값으로 명시한다
+			key 값 : a,b
+			#{a}
+			List 시에는 인덱스번호로
+			#{0}
+		 -->
 			INSERT INTO PRODUCT
 			VALUES(BANK_SEQ.NEXTVAL, #{product_type}, #{product_rate}, #{product_detail})
-		</select>
+		</insert>
 		
-		<select id="delete" parameterType="com.jang.app.product.ProductDTO">
+		<delete id="delete" parameterType="ProductDTO">
 			DELETE PRODUCT WHERE PRODUCT_ID = #{product_id}
-		</select>
+		</delete>
 		
-		<select id="update" parameterType="com.jang.app.product.ProductDTO">
+		<update id="update" parameterType="ProductDTO">
 			UPDATE PRODUCT SET PRODUCT_TYPE=#{product_type}, PRODUCT_RATE =#{product_rate}, PRODUCT_DETAIL=#{product_detail} 
 			WHERE PRODUCT_ID = #{product_id}
-		</select>
-
+		</update>
+		
 	</mapper>
 
