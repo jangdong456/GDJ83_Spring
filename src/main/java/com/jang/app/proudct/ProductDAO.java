@@ -77,6 +77,27 @@ public class ProductDAO {
 		
 	}
 	
-	
+	public int add(ProductDTO productDTO) throws Exception {
+		System.out.println("add dao");
+		Connection con = dbconnetion.getConnertion();
+		
+		String sql = "INSERT INTO PRODUCT "
+				+ " (PRODUCT_ID, PRODUCT_TYPE, PRODUCT_RATE, PRODUCT_DETAIL)"
+				+ " VALUES (PRODUCT_SEQ.NEXTVAL, ?, ?)"; 
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+
+		st.setString(1, productDTO.getProduct_type());
+		st.setDouble(2, productDTO.getProduct_rate());
+		
+		int result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+
 	
 }
