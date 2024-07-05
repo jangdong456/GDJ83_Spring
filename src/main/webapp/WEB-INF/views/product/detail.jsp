@@ -31,6 +31,7 @@
 	</div>
 	
 	<div>
+		<a href ="">상품가입</a>
 		<a href ="delete?product_id=${detail.product_id}" class="btn btn-primary" role="button">삭제</a>
 		<a href ="update?product_id=${detail.product_id}" class="btn btn-primary" role="button">수정</a>
 	</div>

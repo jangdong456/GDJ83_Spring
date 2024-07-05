@@ -18,15 +18,21 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
-        <%-- 
+        
         <c:choose>
 	        <c:when test="${not empty member}">
-			<li class="nav-item">
-	 			<a class="nav-link" href="/member/join">마이페이지</a>
-	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="/member/login">로그아웃</a>
+	 			<a class="nav-link" href="/account/add">계좌생성</a>
 	        </li>
+	        
+	        <li class="nav-item">
+	 			<a class="nav-link" href="/member/mypage">마이페이지</a>
+	        </li>
+	        
+			<li class="nav-item">
+	          <a class="nav-link" href="/member/logout">로그아웃</a>
+	        </li>
+
 	        </c:when>
 	
 	        <c:otherwise>        	      	
@@ -39,8 +45,9 @@
 	        </c:otherwise>
         
         </c:choose>
-        --%>
-
+       
+		<%-- 
+		<!--  empty : null | not empty : not null  -->
       	<c:if test="${empty member}">
         <li class="nav-item">
           <a class="nav-link" href="/member/join">회원가입</a>
@@ -50,14 +57,17 @@
         </li>
 		</c:if>
 		
+		
+		
 		<c:if test="${not empty member}">
 		<li class="nav-item">
- 			<a class="nav-link" href="/member/join">마이페이지</a>
+ 			<a class="nav-link" href="/member/mypage">마이페이지</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/member/logout">로그아웃</a>
         </li>
 		</c:if>
+		 --%>
 
       
       </ul>
