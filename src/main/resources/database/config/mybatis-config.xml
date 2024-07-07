@@ -12,6 +12,7 @@
  		<typeAlias type="com.jang.app.product.ProductDTO" alias="ProductDTO"/>
  		<typeAlias type="java.util.Map" alias="Map"/>
  		<typeAlias type="com.jang.app.members.MemberDTO" alias="MemberDTO"/>
+ 		<typeAlias type="com.jang.app.accounts.AccountDTO" alias="AccountDTO"/>
  	</typeAliases>
  	
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.jang.app.accounts.AccountDAO">
+   		<insert id="add" parameterType="AccountDTO">
+   			INSERT INTO PRODUCT_INFO
+   			VALUES (BANK_SEQ.NEXTVAL, 5, #{m_id}, SYSDATE, #{account_number}, #{balance})
+   		</insert>
+   <!--  to_date(sysdate,'YYYY-MM-DD') -->
+   </mapper>
