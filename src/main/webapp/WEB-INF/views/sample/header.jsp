@@ -22,9 +22,9 @@
         <c:choose>
 	        <c:when test="${not empty member}">
 	        <li class="nav-item">
-	 			<a class="nav-link" href="/account/add">계좌생성</a>
+	 			<a class="nav-link" href="/product/list">상품리스트</a>
 	        </li>
-	        
+	        	        
 	        <li class="nav-item">
 	 			<a class="nav-link" href="/member/mypage">마이페이지</a>
 	        </li>

@@ -2,7 +2,6 @@ package com.jang.app.accounts;
 
 import java.util.Calendar;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.jang.app.members.*;
-import com.jang.app.product.ProductDTO;
+
+import com.jang.app.members.MemberDTO;
 
 
 @Controller
@@ -29,7 +28,6 @@ public class AccountController {
 		String accountNum = String.valueOf(num);
 			
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
-
 		
 		System.out.println("로그인 id: " + memberdto.getM_id());
 
@@ -37,13 +35,14 @@ public class AccountController {
 		accountdto.setAccount_number(accountNum);
 		accountdto.setBalance(0);
 		
+		
 		String url = "commons/message";
 		
 		int result = accountService.add(accountdto);
 		if(result > 0) {
 			url = "redirect:/";
 		} else {
-			model.addAttribute("resutl", "계좌발급 실패");			
+			model.addAttribute("resutl", "계좌발급 실패");	
 		}
 		return url;
 	}

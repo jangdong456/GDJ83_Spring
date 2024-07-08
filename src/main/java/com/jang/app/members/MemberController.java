@@ -1,5 +1,7 @@
 package com.jang.app.members;
 
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.jang.app.accounts.AccountDTO;
 
 @Controller
 @RequestMapping("/member/*")
@@ -53,20 +57,23 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(MemberDTO memberDTO, String remember, HttpServletResponse response, HttpSession session) throws Exception {
-
-		memberDTO = memberService.login(memberDTO);
+	public String login(AccountDTO accountdto ,MemberDTO memberDTO, String remember, HttpServletResponse response, HttpSession session) throws Exception {
 		
-
-		if(memberDTO != null) {
-			session.setAttribute("member",memberDTO);
+		
+		//memberDTO = memberService.login(memberDTO);
+		Map<String, Object> map = memberService.login(memberDTO);
+		
+		
+				
+		if(map != null) {
+			session.setAttribute("member",map);
 			
+
 			System.out.println("로그인 성공");
 		} else {
 			System.out.println("로그인 실패");
 		}
 		
-		System.out.println("id기억 : " + remember);
 		
 		if(remember != null) {
 			Cookie cookie = new Cookie("remember", memberDTO.getMember_name());
@@ -94,10 +101,12 @@ public class MemberController {
 	
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
 	public void mypage(HttpSession session, Model model) throws Exception {
-		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
+//		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
+			
+//		memberdto = memberService.login(memberdto);
 		
-		memberdto = memberService.login(memberdto);
-		model.addAttribute("member", memberdto);
+//		model.addAttribute("member", memberdto);
+
 		
 	
 	}
@@ -106,7 +115,7 @@ public class MemberController {
 	public void update(HttpSession session, Model model) throws Exception {
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
 		
-		memberdto = memberService.login(memberdto);
+//		memberdto = memberService.login(memberdto);
 		model.addAttribute("member", memberdto);
 
 	}

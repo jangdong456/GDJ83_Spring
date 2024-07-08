@@ -14,9 +14,17 @@
 <div class="container-fluid mt-5">
 	<div class="row justify-content-center">
 		<div class="col-md-6">
-			<h3>${member.member_name}</h3>
-			<h3>${member.phone}</h3>
-			<h3>${member.email}</h3>
+			<h3>${member.member.member_name}</h3>
+			<h3>${member.member.phone}</h3>
+			<h3>${member.member.email}</h3>
+			
+			<div>
+				<h3>계좌정보</h3>
+				<c:forEach items="${member.accounts}" var = "ac">
+					<h3>${ac.account_number} : ${ac.balance}</h3>			
+				</c:forEach>
+			</div>
+
 
 			<div>
 				<a href="./update" class="btn btn-primary">회원수정</a>
