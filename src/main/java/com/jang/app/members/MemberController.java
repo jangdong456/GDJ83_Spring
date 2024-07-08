@@ -1,7 +1,5 @@
 package com.jang.app.members;
 
-import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.jang.app.accounts.AccountDTO;
 
 @Controller
 @RequestMapping("/member/*")
@@ -57,16 +53,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(AccountDTO accountdto ,MemberDTO memberDTO, String remember, HttpServletResponse response, HttpSession session) throws Exception {
+	public String login(MemberDTO memberDTO, String remember, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		
-		//memberDTO = memberService.login(memberDTO);
-		Map<String, Object> map = memberService.login(memberDTO);
+		
+//		memberDTO.setM_id(null);
+		memberDTO = memberService.login(memberDTO);
+//		Map<String, Object> map = memberService.login(memberDTO);
 		
 		
 				
-		if(map != null) {
-			session.setAttribute("member",map);
+		if(memberDTO != null) {
+			session.setAttribute("member",memberDTO);
 			
 
 			System.out.println("로그인 성공");

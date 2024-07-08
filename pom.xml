@@ -7,6 +7,7 @@
 	<name>GDJ83_Spring</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<!--  properties 태그는 변수이다. : 그래서 변수를 사용하려면 el태그를 사용하면된다. -->
 	<properties>
 		<java-version>1.11</java-version>
 		<org.springframework-version>4.3.2.RELEASE</org.springframework-version>
@@ -138,10 +139,19 @@
 		</dependency>
 	
 		<!-- Test -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${org.springframework-version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>        
 	</dependencies>

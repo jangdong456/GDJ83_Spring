@@ -1,5 +1,9 @@
 package com.jang.app.members;
 
+import java.util.List;
+
+import com.jang.app.accounts.AccountDTO;
+
 public class MemberDTO {
 	
 	private Integer m_id;
@@ -9,7 +13,14 @@ public class MemberDTO {
 	private String email;
 	private String member_id;
 	private String member_pwd;
+	private List<AccountDTO> dtos;
 	
+	public List<AccountDTO> getDtos() {
+		return dtos;
+	}
+	public void setDtos(List<AccountDTO> dtos) {
+		this.dtos = dtos;
+	}
 	public Integer getM_id() {
 		return m_id;
 	}

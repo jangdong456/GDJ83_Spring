@@ -10,11 +10,44 @@
  		#{email}, #{member_id}, #{member_pwd})
  	</insert>
  	
- 	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
- 		SELECT * FROM MEMBERS
+   
+ 	<select id="login" parameterType="MemberDTO" resultMap="loginResult">
+ 		SELECT M.*, INFO.* 
+ 		FROM MEMBERS M
+ 			LEFT JOIN
+ 			PRODUCT_INFO INFO 
+ 			ON M_ID = 1
  		WHERE MEMBER_ID = #{member_id}
  	</select>
- 	
+	
+	<resultMap type="MemberDTO" id="loginResult">
+		<!-- id :  primary key 용도
+			column = "컬럼명"
+		     property= "type의 setter이름"
+		  -->
+		<id column="M_ID" property="m_id"/>
+		<result column = "MEMBER_NAME" property="member_name"/>
+		<result column = "MEMBER_NUMBER" property="member_number"/>
+		<result column = "PHONE" property="phone"/>
+		<result column = "EMAIL" property="email"/>
+		<result column = "MEMBER_ID" property="member_id"/>
+		<result column = "MEMBER_PWD" property="member_pwd"/>
+		<!-- (멤버)1:N(계좌) -->
+		<collection property="dtos" javaType="java.util.List" ofType="AccountDTO">
+			<id column="PRODUCT_INFO_ID" property="product_info_id"/>
+			<result column="PRODUCT_ID" property="product_id"/>
+			<result column="M_ID" property="m_id"/>
+			<result column="JOIN_DATE" property="join_date"/>
+			<result column="ACCOUNT_NUMBER" property="account_number"/>
+			<result column="BALANCE" property="balance"/>
+		</collection>	
+	</resultMap>
+	
+ 	<!--  
+ 	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
+  		SELECT * FROM MEMBERS WHERE MEMBER_id= #{member_id}
+  	</select>
+ 	 -->
  	<update id="update" parameterType="MemberDTO">
  		UPDATE MEMBERS SET MEMBER_NAME=#{member_name}, PHONE=#{phone}, EMAIL=#{email}
  		<!--  WHERE MEMBER_ID = #{member_id} -->

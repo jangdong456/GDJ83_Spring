@@ -16,7 +16,7 @@
 			</div>
 			<form action="./login" method="post">
 			  <div class="mb-3">
-			    <label for="member_id" class="form-label">아이디</label>
+			    <label for="member_id" class="form-label">아이디</label> 
 			    <input type="text" class="form-control" id="member_id" name="member_id" value="${id}">
 			  </div>
 			  

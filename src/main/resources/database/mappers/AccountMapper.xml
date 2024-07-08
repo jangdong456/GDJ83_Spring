@@ -12,17 +12,7 @@
    		<select id="list" parameterType="MemberDTO" resultType="AccountDTO">
    			SELECT ACCOUNT_NUMBER, BALANCE
    			FROM PRODUCT_INFO
-   			WHERE M_ID = 10
+   			WHERE M_ID = 1
    		</select>
-   		
-   		<!--   
-   		<select id="list" parameterType="MemberDTO" resultType="AccountDTO">
-			SELECT ACCOUNT_NUMBER, BALANCE
-			FROM MEMBERS
-				INNER JOIN
-				PRODUCT_INFO
-				USING(M_ID);
-   		</select>
-   		-->
-   		
+   		  		
    </mapper>
