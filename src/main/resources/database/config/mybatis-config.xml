@@ -9,10 +9,12 @@
  <configuration>
  	<typeAliases>
  		<!--  Aliases : 별칭 -->
- 		<typeAlias type="com.jang.app.product.ProductDTO" alias="ProductDTO"/>
  		<typeAlias type="java.util.Map" alias="Map"/>
+ 		<typeAlias type="com.jang.app.product.ProductDTO" alias="ProductDTO"/>
  		<typeAlias type="com.jang.app.members.MemberDTO" alias="MemberDTO"/>
  		<typeAlias type="com.jang.app.accounts.AccountDTO" alias="AccountDTO"/>
+ 		<typeAlias type="com.jang.app.transfers.TransferDTO" alias="TransferDTO"/>
+
  	</typeAliases>
  	
 

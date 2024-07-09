@@ -13,4 +13,16 @@ public class AccountService {
 		return accountDAO.add(accountdto);
 	}
 	
+	public AccountDTO detail(AccountDTO accountdto) throws Exception {
+		return accountDAO.detail(accountdto);
+	}
+	
+	public AccountDTO transfer(AccountDTO accountDTO) throws Exception {
+		return accountDAO.transfer(accountDTO);
+	}
+	
+	public int update(AccountDTO accountDTO) throws Exception {
+		return accountDAO.update(accountDTO);
+	}
+
 }

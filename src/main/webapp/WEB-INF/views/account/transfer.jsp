@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,25 +13,26 @@
 		<div class="container mt-5">
 		<div class="row">
 			<div class="row">
-				<h1>로그인</h1>			
+				<h1>이체</h1>			
 			</div>
-			<form action="./login" method="post">
+			<form action="./transfer" method="post">
 			  <div class="mb-3">
-			    <label for="member_id" class="form-label">아이디</label> 
-			    <input type="text" class="form-control" id="member_id" name="member_id" value="${id}">
+			    <label for="my_number" class="form-label">내 계좌번호</label> 
+			    <input type="text" class="form-control" id="my_number" name="my_number">
+			  </div>
+			
+			  <div class="mb-3">
+			    <label for="account_number" class="form-label">계좌번호</label> 
+			    <input type="text" class="form-control" id="account_number" name="account_number">
 			  </div>
 			  
 			  <div class="mb-3"> 
-			    <label for="member_pwd" class="form-label">비밀번호</label>
-			    <input type="text" class="form-control" id="member_pwd" name="member_pwd">
+			    <label for=balance class="form-label">이체금액</label>
+			    <input type="text" class="form-control" id="balance" name="balance">
 			  </div>
 			  
-			  <div class="mb-3 form-check">
-			    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
-			    <label class="form-check-label" for="exampleCheck1">ID 기억하기</label>
-			  </div>
-			  
-			  <button type="submit" class="btn btn-primary">로그인</button>
+
+			  <button type="submit" class="btn btn-primary">이체하기</button>
 			</form>
 		</div>
 	</div>	

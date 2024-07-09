@@ -2,6 +2,9 @@ package com.jang.app.accounts;
 
 import java.sql.Date;
 
+import com.jang.app.members.MemberDTO;
+import com.jang.app.product.ProductDTO;
+
 public class AccountDTO {
 
 	private Integer product_info_id;
@@ -10,6 +13,8 @@ public class AccountDTO {
 	private Date join_date;
 	private String account_number;
 	private Integer balance;
+	private MemberDTO memberDTO;
+	private ProductDTO productDTO;
 	
 	public Integer getProduct_info_id() {
 		return product_info_id;
@@ -47,5 +52,19 @@ public class AccountDTO {
 	public void setBalance(Integer balance) {
 		this.balance = balance;
 	}
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
+	}
+	public ProductDTO getProductDTO() {
+		return productDTO;
+	}
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
+	}
+	
+
 	
 }

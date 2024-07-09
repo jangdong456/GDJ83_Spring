@@ -1,12 +1,8 @@
 package com.jang.app.accounts;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.jang.app.members.MemberDTO;
 
 @Repository
 public class AccountDAO {
@@ -19,7 +15,16 @@ public class AccountDAO {
 		 return sqlSession.insert(NAMESPACE + "add" , accountdto);
 	}
 	
-	public List<AccountDTO> list(MemberDTO memberdto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "list", memberdto);
+	// 계좌의 모든정보와 상품명, 이자율 출력
+	public AccountDTO detail(AccountDTO accountDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "detail", accountDTO);
+	}
+	
+	public AccountDTO transfer(AccountDTO accountDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "transfer", accountDTO);
+	}
+	
+	public int update(AccountDTO accountDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "update", accountDTO);
 	}
 }

@@ -2,17 +2,54 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   <mapper namespace="com.jang.app.accounts.AccountDAO">
-   		<insert id="add" parameterType="AccountDTO">
-   			INSERT INTO PRODUCT_INFO (PRODUCT_INFO_ID, PRODUCT_ID, M_ID, JOIN_DATE, ACCOUNT_NUMBER, BALANCE)
-   			VALUES (BANK_SEQ.NEXTVAL, #{product_id}, #{m_id}, SYSDATE, #{account_number}, #{balance})
-   		</insert>
+  
+<mapper namespace="com.jang.app.accounts.AccountDAO">
    <!--  자바에서 알아서 순서대로 숫자 넣어줌 -> #{product_info_id} | to_date(sysdate,'YYYY-MM-DD') 5 , BANK_SEQ.NEXTVAL-->
+ 	<insert id="add" parameterType="AccountDTO">
+ 		INSERT INTO PRODUCT_INFO (PRODUCT_INFO_ID, PRODUCT_ID, M_ID, JOIN_DATE, ACCOUNT_NUMBER, BALANCE)
+ 		VALUES (BANK_SEQ.NEXTVAL, #{product_id}, #{m_id}, SYSDATE, #{account_number}, #{balance})
+ 	</insert>
+ 	
+ 	<select id="transfer" parameterType="AccountDTO" resultType="AccountDTO">
+ 		SELECT * FROM PRODUCT_INFO
+ 		WHERE ACCOUNT_NUMBER = #{account_number}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="AccountDTO">
+ 		UPDATE PRODUCT_INFO SET BALANCE = #{balance} - #{balance}
+		WHERE ACCOUNT_NUMBER = #{account_number};
+ 	</update>
    
-   		<select id="list" parameterType="MemberDTO" resultType="AccountDTO">
-   			SELECT ACCOUNT_NUMBER, BALANCE
-   			FROM PRODUCT_INFO
-   			WHERE M_ID = 1
-   		</select>
-   		  		
-   </mapper>
+	<select id="detail" parameterType="AccountDTO" resultMap="detailResult">
+  		SELECT INFO.*, P.*
+		FROM 
+			PRODUCT_INFO INFO
+		INNER JOIN
+			PRODUCT P
+			ON INFO.PRODUCT_ID = P.PRODUCT_ID
+		WHERE INFO.ACCOUNT_NUMBER = #{account_number}
+  	</select>
+	
+   	<resultMap type="AccountDTO" id="detailResult">
+  		<id column="PRODUCT_INFO_ID" property="product_info_id"/>
+		<result column="PRODUCT_ID" property="product_id"/>
+		<result column="M_ID" property="m_id"/>
+		<result column="JOIN_DATE" property="join_date"/> 
+		<result column="ACCOUNT_NUMBER" property="account_number"/>
+		<result column="BALANCE" property="balance"/>
+
+   		<association property="productDTO" javaType="ProductDTO">
+   			<result column="PRODUCT_TYPE" property="product_type"/>
+   			<result column="PRODUCT_RATE" property="product_rate"/>
+   			<result column="PRODUCT_DETAIL" property="product_detail"/>
+   		</association>
+   	</resultMap>
+   	
+<!--    	<resultMap type="AccountDTO" id="transferResult"> -->
+<!--    		<id column="PRODUCT_INFO_ID" property="product_info_id"></id> -->
+   		
+<!--    		 (계좌)1 : N(거래내역) HISTORY -->
+<!--    		<collection property="dto" javaType="java.util.List" ofType = "TransferDTO"></collection> -->
+<!--    			<id column="PRODUCT_INFO_ID" property="product_info_id"></id> -->
+<!--    	</resultMap> -->
+  </mapper>

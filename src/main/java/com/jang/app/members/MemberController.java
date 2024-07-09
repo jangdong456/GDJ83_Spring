@@ -55,17 +55,14 @@ public class MemberController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(MemberDTO memberDTO, String remember, HttpServletResponse response, HttpSession session) throws Exception {
 		
+//		memberDTO = memberService.login(memberDTO);
+
 		
 		
-//		memberDTO.setM_id(null);
-		memberDTO = memberService.login(memberDTO);
-//		Map<String, Object> map = memberService.login(memberDTO);
-		
-		
+		MemberDTO result = memberService.login(memberDTO);
 				
 		if(memberDTO != null) {
-			session.setAttribute("member",memberDTO);
-			
+			session.setAttribute("member",result);
 
 			System.out.println("로그인 성공");
 		} else {
@@ -99,21 +96,19 @@ public class MemberController {
 	
 	@RequestMapping(value = "mypage", method = RequestMethod.GET)
 	public void mypage(HttpSession session, Model model) throws Exception {
-//		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
-			
-//		memberdto = memberService.login(memberdto);
-		
-//		model.addAttribute("member", memberdto);
+		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
 
-		
-	
+		memberdto = memberService.detail(memberdto);
+		model.addAttribute("member", memberdto);
+
 	}
-	
+
+
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public void update(HttpSession session, Model model) throws Exception {
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
 		
-//		memberdto = memberService.login(memberdto);
+		memberdto = memberService.detail(memberdto);
 		model.addAttribute("member", memberdto);
 
 	}

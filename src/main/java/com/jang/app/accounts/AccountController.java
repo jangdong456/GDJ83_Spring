@@ -2,6 +2,7 @@ package com.jang.app.accounts;
 
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jang.app.members.MemberDTO;
+import com.jang.app.transfers.TransferDTO;
 
 
 @Controller
@@ -46,4 +48,43 @@ public class AccountController {
 		}
 		return url;
 	}
+	
+	@RequestMapping(value= "detail", method = RequestMethod.GET)
+	public void detail(AccountDTO accountDTO, Model model) throws Exception {
+		accountDTO = accountService.detail(accountDTO);
+
+		if (accountDTO != null) {
+
+			model.addAttribute("dto", accountDTO);
+		}
+	}
+	
+	@RequestMapping(value="transfer", method= RequestMethod.GET)
+	public void transfer() throws Exception {
+
+	}
+
+	@RequestMapping(value = "transfer", method= RequestMethod.POST)
+	public void transfer2(AccountDTO accountDTO ,TransferDTO transferdto ,HttpSession session, HttpServletRequest request) throws Exception {
+//		MemberDTO accountdto = (MemberDTO)session.getAttribute("member");
+//		System.out.println("확인 : "+ accountdto.getMember_number());
+//		System.out.println("======= : " + accountDTO.getAccount_number());
+//		
+//		System.out.println(request.getParameter("account_number"));
+//		System.out.println(request.getParameter("amount"));
+		
+		AccountDTO result = accountService.transfer(accountDTO);
+		System.out.println(accountDTO.getAccount_number());
+		System.out.println(accountDTO.getBalance());
+		
+		
+		if(accountDTO.getAccount_number().equals(result.getAccount_number())) {
+			System.out.println("==============");
+			accountService.update(accountDTO);
+			System.out.println("통과");
+			
+		}
+		
+	}
+		
 }
