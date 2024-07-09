@@ -10,17 +10,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-		<div class="container mt-5">
+	<div class="container mt-5">
 		<div class="row">
-			<div class="row">
-				<h1>이체</h1>			
+			<div class="row">		
+			    <h1><label for="my_number" class="form-label">내 계좌번호 : ${accountNum.account_number}</label></h1>
 			</div>
-			<form action="./transfer" method="post">
-			  <div class="mb-3">
-			    <label for="my_number" class="form-label">내 계좌번호</label> 
-			    <input type="text" class="form-control" id="my_number" name="my_number">
-			  </div>
+
 			
+			<form action="./transfer" method="post">
+
 			  <div class="mb-3">
 			    <label for="account_number" class="form-label">계좌번호</label> 
 			    <input type="text" class="form-control" id="account_number" name="account_number">

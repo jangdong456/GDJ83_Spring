@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jang.app.members.MemberDTO;
+import com.jang.app.members.MemberService;
 import com.jang.app.transfers.TransferDTO;
 
 
@@ -21,6 +22,9 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value= "add", method = RequestMethod.GET)
 	public String add(HttpSession session, AccountDTO accountdto, Model model) throws Exception {
@@ -60,30 +64,33 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="transfer", method= RequestMethod.GET)
-	public void transfer() throws Exception {
-
+	public void transfer(AccountDTO accountDTO, Model model) throws Exception {
+		accountDTO = accountService.detail(accountDTO);
+		model.addAttribute("accountNum",accountDTO);
 	}
 
 	@RequestMapping(value = "transfer", method= RequestMethod.POST)
 	public void transfer2(AccountDTO accountDTO ,TransferDTO transferdto ,HttpSession session, HttpServletRequest request) throws Exception {
-//		MemberDTO accountdto = (MemberDTO)session.getAttribute("member");
-//		System.out.println("확인 : "+ accountdto.getMember_number());
-//		System.out.println("======= : " + accountDTO.getAccount_number());
-//		
-//		System.out.println(request.getParameter("account_number"));
-//		System.out.println(request.getParameter("amount"));
 		
-		AccountDTO result = accountService.transfer(accountDTO);
+//		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+//		memberDTO = memberService.detail(memberDTO);
+		
+		accountDTO = accountService.detail(accountDTO);
 		System.out.println(accountDTO.getAccount_number());
-		System.out.println(accountDTO.getBalance());
 		
-		
-		if(accountDTO.getAccount_number().equals(result.getAccount_number())) {
-			System.out.println("==============");
-			accountService.update(accountDTO);
+		if(accountDTO.getAccount_number().equals(request.getParameter("account_number"))){
 			System.out.println("통과");
-			
 		}
+
+
+		
+		
+//		if(accountDTO.getAccount_number().equals(result.getAccount_number())) {
+//			System.out.println("==============");
+//			accountService.update(accountDTO);
+//			System.out.println("통과");
+//			
+//		}
 		
 	}
 		
