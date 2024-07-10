@@ -10,14 +10,35 @@
   		VALUES
   			(
   				HISTORY_SEQ.NEXTVAL,#{product_info_id}, SYSDATE, #{amount},
-  				(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{account_number)}) + #{amount},
-  				#{balance},
-  				#{type}
+  				
+  				<choose>
+  					<!-- 숫자는 코따음표 빼기 ''  -->
+  					<when test="type =='입금'">
+  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{받는계좌번호)}) + #{amount},
+  					#{balance},
+  					#{type}
+  					</when>
+  					<otherwise>
+  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{account_number)}) - #{amount},
+  					#{balance},
+  					#{type}
+  					</otherwise>
+  				</choose>
+
   			)
   	</insert>
   	
   	<update id="update" parameterType="TransferDTO">
-  		UPDATE PRODUCT_INFO SET BALANCE = BALANCE + #{amount}
+  		<!--if문 type가 '입금'이면~ , '출금'이면~  -->
+  		UPDATE PRODUCT_INFO SET 
+  		<if test="type =='입금'">
+  		BALANCE = BALANCE + #{amount}
+  		WHERE PRODUCT_INFO_ID = #{product_info_id} <!-- 받는계좌 id -->
+  		</if>
+  		
+  		<if test="type == '출금'">
+  		BALANCE = BALANCE - #{amount}
   		WHERE PRODUCT_INFO_ID = #{product_info_id}
+  		</if>
   	</update>
   </mapper>
