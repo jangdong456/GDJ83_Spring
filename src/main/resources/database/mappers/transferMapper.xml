@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.jang.app.transfers.TransferDTO">
+  	<insert id="add" parameterType="TransferDTO">
+  		INSERT INTO HISTORY
+  			(HISTORY_ID, PRODUCT_INFO_ID, HISTORY_TIME, AMOUNT, BALANCE, TYPE)
+  		VALUES
+  			(
+  				HISTORY_SEQ.NEXTVAL,#{product_info_id}, SYSDATE, #{amount},
+  				(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{account_number)}) + #{amount},
+  				#{balance},
+  				#{type}
+  			)
+  	</insert>
+  	
+  	<update id="update" parameterType="TransferDTO">
+  		UPDATE PRODUCT_INFO SET BALANCE = BALANCE + #{amount}
+  		WHERE PRODUCT_INFO_ID = #{product_info_id}
+  	</update>
+  </mapper>

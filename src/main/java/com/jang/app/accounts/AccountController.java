@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jang.app.members.MemberDTO;
 import com.jang.app.members.MemberService;
-import com.jang.app.transfers.TransferDTO;
-
 
 @Controller
 @RequestMapping("/account/*")
@@ -25,6 +23,9 @@ public class AccountController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+//	@Autowired
+//	private TransferService transferService;
 	
 	@RequestMapping(value= "add", method = RequestMethod.GET)
 	public String add(HttpSession session, AccountDTO accountdto, Model model) throws Exception {
@@ -65,12 +66,22 @@ public class AccountController {
 	
 	@RequestMapping(value="transfer", method= RequestMethod.GET)
 	public void transfer(AccountDTO accountDTO, Model model) throws Exception {
-		accountDTO = accountService.detail(accountDTO);
-		model.addAttribute("accountNum",accountDTO);
+//		accountDTO = accountService.detail(accountDTO);
+//		model.addAttribute("accountNum",accountDTO);
 	}
+	
+//	@RequestMapping(value = "transfer", method= RequestMethod.POST)
+//	public String transfer (TransferDTO transferdto) throws Exception {
+//		// tranasferdto : 계좌번호가 1개
+//		// 보내는 계좌 : account_number
+//		// 받는 계좌 : receive_number
+//		
+//		int result = transferService.trade(transferdto);
+//		return "redirect:../member/mypage";
+//	}
 
 	@RequestMapping(value = "transfer", method= RequestMethod.POST)
-	public void transfer2(AccountDTO accountDTO ,TransferDTO transferdto ,HttpSession session, HttpServletRequest request) throws Exception {
+	public void transfer(AccountDTO accountDTO  ,HttpSession session, HttpServletRequest request) throws Exception {
 		
 //		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 //		memberDTO = memberService.detail(memberDTO);
@@ -78,20 +89,19 @@ public class AccountController {
 		accountDTO = accountService.detail(accountDTO);
 		System.out.println(accountDTO.getAccount_number());
 		
+		String user = request.getParameter("balance");
+		System.out.println("=================");
+		System.out.println(request.getParameter("my_account_number"));
+	
+		//계좌가 있는지 파악
+		//상대 계좌
 		if(accountDTO.getAccount_number().equals(request.getParameter("account_number"))){
-			System.out.println("통과");
-		}
-
-
-		
-		
-//		if(accountDTO.getAccount_number().equals(result.getAccount_number())) {
-//			System.out.println("==============");
-//			accountService.update(accountDTO);
-//			System.out.println("통과");
+//			accountDTO.setBalance((Integer)user);
 //			
-//		}
-		
+//			accountService.update(accountDTO);
+		}
 	}
+
+	
 		
 }

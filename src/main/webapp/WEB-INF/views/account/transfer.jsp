@@ -13,11 +13,15 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="row">		
-			    <h1><label for="my_number" class="form-label">내 계좌번호 : ${accountNum.account_number}</label></h1>
+			    <h1><label for="my_number" class="form-label">내 계좌번호 : ${param.account_number}</label></h1>
 			</div>
 
 			
 			<form action="./transfer" method="post">
+			  <div class="mb-3">
+			    <input type="hidden" class="form-control" id="my_account_number" name="my_account_number" value="${param.account_number}">
+			  </div>
+			
 
 			  <div class="mb-3">
 			    <label for="account_number" class="form-label">계좌번호</label> 
@@ -27,6 +31,11 @@
 			  <div class="mb-3"> 
 			    <label for=balance class="form-label">이체금액</label>
 			    <input type="text" class="form-control" id="balance" name="balance">
+			  </div>
+			  
+			  <div class="mb-3"> 
+			    <label for=type class="form-label">입출금</label>
+			    <input type="text" class="form-control" id="type" name="type">
 			  </div>
 			  
 
