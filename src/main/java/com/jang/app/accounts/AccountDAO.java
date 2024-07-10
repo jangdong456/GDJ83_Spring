@@ -20,11 +20,11 @@ public class AccountDAO {
 		return sqlSession.selectOne(NAMESPACE + "detail", accountDTO);
 	}
 	
-	public int transfer(AccountDTO accountDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "transfer", accountDTO);
-	}
-	
-	public int update(AccountDTO accountDTO) throws Exception {
-		return sqlSession.update(NAMESPACE + "update", accountDTO);
-	}
+//	public int transfer(AccountDTO accountDTO) throws Exception {
+//		return sqlSession.update(NAMESPACE + "transfer", accountDTO);
+//	}
+//	
+//	public int update(AccountDTO accountDTO) throws Exception {
+//		return sqlSession.update(NAMESPACE + "update", accountDTO);
+//	}
 }

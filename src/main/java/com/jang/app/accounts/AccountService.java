@@ -21,8 +21,10 @@ public class AccountService {
 //		return accountDAO.transfer(transferDTO);
 //	}
 	
-	public int update(AccountDTO accountDTO) throws Exception {
-		return accountDAO.update(accountDTO);
-	}
+//	public int update(AccountDTO accountDTO) throws Exception {
+//		return accountDAO.update(accountDTO);
+//	}
+	
+
 
 }

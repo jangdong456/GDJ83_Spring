@@ -9,8 +9,6 @@ public class TransferDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Autowired
 	private final String NAMESPACE = "com.jang.app.transfers.TransferDAO.";
 	
 	// 입출금 내역

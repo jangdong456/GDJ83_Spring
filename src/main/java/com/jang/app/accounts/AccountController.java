@@ -2,7 +2,6 @@ package com.jang.app.accounts;
 
 import java.util.Calendar;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jang.app.members.MemberDTO;
 import com.jang.app.members.MemberService;
+import com.jang.app.transfers.TransferDTO;
+import com.jang.app.transfers.TransferService;
 
 @Controller
 @RequestMapping("/account/*")
@@ -24,8 +25,8 @@ public class AccountController {
 	@Autowired
 	private MemberService memberService;
 	
-//	@Autowired
-//	private TransferService transferService;
+	@Autowired
+	private TransferService transferService;
 	
 	@RequestMapping(value= "add", method = RequestMethod.GET)
 	public String add(HttpSession session, AccountDTO accountdto, Model model) throws Exception {
@@ -55,11 +56,14 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value= "detail", method = RequestMethod.GET)
-	public void detail(AccountDTO accountDTO, Model model) throws Exception {
+	public void detail(AccountDTO accountDTO, Model model, HttpSession session) throws Exception {
 		accountDTO = accountService.detail(accountDTO);
+		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
+
+		memberdto = memberService.detail(memberdto);
+		model.addAttribute("ac", memberdto);
 
 		if (accountDTO != null) {
-
 			model.addAttribute("dto", accountDTO);
 		}
 	}
@@ -70,37 +74,37 @@ public class AccountController {
 //		model.addAttribute("accountNum",accountDTO);
 	}
 	
-//	@RequestMapping(value = "transfer", method= RequestMethod.POST)
-//	public String transfer (TransferDTO transferdto) throws Exception {
-//		// tranasferdto : 계좌번호가 1개
-//		// 보내는 계좌 : account_number
-//		// 받는 계좌 : receive_number
-//		
-//		int result = transferService.trade(transferdto);
-//		return "redirect:../member/mypage";
-//	}
-
 	@RequestMapping(value = "transfer", method= RequestMethod.POST)
-	public void transfer(AccountDTO accountDTO  ,HttpSession session, HttpServletRequest request) throws Exception {
+	public String transfer (TransferDTO transferdto) throws Exception {
+		// tranasferdto : 계좌번호가 1개
+		// 보내는 계좌 : account_number
+		// 받는 계좌 : receive_number
 		
-//		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-//		memberDTO = memberService.detail(memberDTO);
-		
-		accountDTO = accountService.detail(accountDTO);
-		System.out.println(accountDTO.getAccount_number());
-		
-		String user = request.getParameter("balance");
-		System.out.println("=================");
-		System.out.println(request.getParameter("my_account_number"));
-	
-		//계좌가 있는지 파악
-		//상대 계좌
-		if(accountDTO.getAccount_number().equals(request.getParameter("account_number"))){
-//			accountDTO.setBalance((Integer)user);
-//			
-//			accountService.update(accountDTO);
-		}
+		int result = transferService.trade(transferdto);
+		return "redirect:../member/mypage";
 	}
+
+//	@RequestMapping(value = "transfer", method= RequestMethod.POST)
+//	public void transfer(AccountDTO accountDTO  ,HttpSession session, HttpServletRequest request) throws Exception {
+//		
+////		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+////		memberDTO = memberService.detail(memberDTO);
+//		
+//		accountDTO = accountService.detail(accountDTO);
+//		System.out.println(accountDTO.getAccount_number());
+//		
+//		String user = request.getParameter("balance");
+//		System.out.println("=================");
+//		System.out.println(request.getParameter("my_account_number"));
+//	
+//		//계좌가 있는지 파악
+//		//상대 계좌
+//		if(accountDTO.getAccount_number().equals(request.getParameter("account_number"))){
+////			accountDTO.setBalance((Integer)user);
+////			
+////			accountService.update(accountDTO);
+//		}
+//	}
 
 	
 		

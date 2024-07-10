@@ -16,10 +16,13 @@
 		<h3>개설일 : ${dto.join_date}</h3>
 		<h3>잔액 : ${dto.balance}</h3>
 		<h3>계좌번호 : ${dto.account_number}</h3>
+		<c:forEach items="${ac.dtos}" var = "acc">
+			<h3> pk번호 : ${acc.product_info_id}</h3>
+		</c:forEach>
 	</div>
 	 
 	<div>
-		<h3><a href="transfer?account_number=${dto.account_number}">이체하기</a></h3>
+		<h3><a href="transfer?product_info_id=${dto.product_info_id}">이체하기</a></h3>
 		<c:import url="/transfer">
 			<c:param name="num" value="${dto.account_number}"></c:param>
 		</c:import>

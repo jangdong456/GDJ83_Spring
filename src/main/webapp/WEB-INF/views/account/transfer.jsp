@@ -13,7 +13,8 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="row">		
-			    <h1><label for="my_number" class="form-label">내 계좌번호 : ${param.account_number}</label></h1>
+			    <h1><label for="my_number" class="form-label">내 계좌번호 : ${param.product_info_id}</label></h1>
+			    <h1>${param.product_info_id}</h1>
 			</div>
 
 			
