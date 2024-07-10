@@ -53,6 +53,17 @@
             TYPE
         FROM HISTORY
         WHERE PRODUCT_INFO_ID = #{product_info_id}
+        <choose>
+  		<when test="io==0">
+			AND
+			TYPE = '입금'
+  		</when>
+		<when test="io==1">
+ 			AND
+ 			TYPE = '출금'
+		</when>
+		</choose>
+        
         ORDER BY HISTORY_TIME 
         <if test="order == 1">ASC</if>
         <if test="order == 0">DESC</if>	

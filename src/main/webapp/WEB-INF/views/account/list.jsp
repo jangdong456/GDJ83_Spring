@@ -15,11 +15,11 @@
 	<div class="row justify-content-center">
 		<div class="col-md-6">
 			<div>
-				<a href="list?accountNumber=${param.account_number}&order=1">과거순으로</a>			
-				<a href="list?accountNumber=${param.account_number}&order=0">최신순으로</a>
-				<a href="list?accountNumber=${param.account_number}&io=0">입금만</a>
-				<a href="list?accountNumber=${param.account_number}&io=1">출금만</a>
-				<a href="list?accountNumber=${param.account_number}">입금/출금</a>
+				<a href="list?product_info_id=${param.product_info_id}&order=1">과거순으로</a>			
+				<a href="list?product_info_id=${param.product_info_id}&order=0">최신순으로</a>
+				<a href="list?product_info_id=${param.product_info_id}&io=0">입금만</a>
+				<a href="list?product_info_id=${param.product_info_id}&io=1">출금만</a>
+				<a href="list?product_info_id=${param.product_info_id}">입금/출금</a>
 			</div>
 
 			<table class="table table-hover">
