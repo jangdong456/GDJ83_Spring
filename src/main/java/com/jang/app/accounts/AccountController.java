@@ -75,13 +75,14 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "transfer", method= RequestMethod.POST)
-	public String transfer (TransferDTO transferdto) throws Exception {
+	public void transfer (TransferDTO transferdto) throws Exception {
 		// tranasferdto : 계좌번호가 1개
 		// 보내는 계좌 : account_number
 		// 받는 계좌 : receive_number
 		
-		int result = transferService.trade(transferdto);
-		return "redirect:../member/mypage";
+		transferService.trade(transferdto);
+//		int result = transferService.trade(transferdto);
+//		return "redirect:../member/mypage";
 	}
 
 //	@RequestMapping(value = "transfer", method= RequestMethod.POST)

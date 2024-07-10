@@ -7,19 +7,21 @@
   	<insert id="add" parameterType="TransferDTO">
   		INSERT INTO HISTORY
   			(HISTORY_ID, PRODUCT_INFO_ID, HISTORY_TIME, AMOUNT, BALANCE, TYPE)
-  		VALUES
+  		VALUES 
   			(
-  				HISTORY_SEQ.NEXTVAL,#{product_info_id}, SYSDATE, #{amount},
+  				BANK_SEQ.NEXTVAL, #{product_info_id}, SYSDATE, #{amount},
   				
   				<choose>
-  					<!-- 숫자는 코따음표 빼기 ''  -->
+  					<!-- 숫자는 코따음표 빼기 ''
+  						receiveNumber : 받는계좌
+  					  -->
   					<when test="type =='입금'">
-  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{받는계좌번호)}) + #{amount},
+  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{receiveNumber)}) + #{amount},
   					#{balance},
   					#{type}
   					</when>
   					<otherwise>
-  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{account_number)}) - #{amount},
+  					(SELECT BALANCE FROM PRODUCT_INFO WHERE product_info_id = #{product_info_id)}) - #{amount},
   					#{balance},
   					#{type}
   					</otherwise>
@@ -41,4 +43,6 @@
   		WHERE PRODUCT_INFO_ID = #{product_info_id}
   		</if>
   	</update>
+  	
+
   </mapper>

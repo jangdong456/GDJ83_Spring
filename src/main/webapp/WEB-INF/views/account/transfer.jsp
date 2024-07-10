@@ -20,18 +20,17 @@
 			
 			<form action="./transfer" method="post">
 			  <div class="mb-3">
-			    <input type="hidden" class="form-control" id="my_account_number" name="my_account_number" value="${param.account_number}">
+			    <input type="hidden" class="form-control" id="product_info_id" name="product_info_id" value="${param.product_info_id}">
 			  </div>
-			
-
-			  <div class="mb-3">
-			    <label for="account_number" class="form-label">계좌번호</label> 
-			    <input type="text" class="form-control" id="account_number" name="account_number">
+			  
+			  <div class="mb-3">  
+			    <label for="receiveNumber" class="form-label">계좌번호</label> 
+			    <input type="text" class="form-control" id="receiveNumber" name="receiveNumber">
 			  </div>
 			  
 			  <div class="mb-3"> 
-			    <label for=balance class="form-label">이체금액</label>
-			    <input type="text" class="form-control" id="balance" name="balance">
+			    <label for=amount class="form-label">이체금액</label>
+			    <input type="text" class="form-control" id="amount" name="amount">
 			  </div>
 			  
 			  <div class="mb-3"> 
