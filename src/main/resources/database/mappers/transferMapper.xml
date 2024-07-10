@@ -2,47 +2,47 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.jang.app.transfers.TransferDTO">
+ 
+<mapper namespace="com.jang.app.transfers.TransferDAO">
+	<select id="find" parameterType="TransferDTO" resultType="AccountDTO">
+		SELECT PRODUCT_INFO_ID FROM PRODUCT_INFO
+		WHERE ACCOUNT_NUMBER = #{receiveNumber}
+	</select>
+
   	<insert id="add" parameterType="TransferDTO">
   		INSERT INTO HISTORY
   			(HISTORY_ID, PRODUCT_INFO_ID, HISTORY_TIME, AMOUNT, BALANCE, TYPE)
   		VALUES 
   			(
+  			
   				BANK_SEQ.NEXTVAL, #{product_info_id}, SYSDATE, #{amount},
   				
   				<choose>
   					<!-- 숫자는 코따음표 빼기 ''
   						receiveNumber : 받는계좌
   					  -->
-  					<when test="type =='입금'">
-  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{receiveNumber)}) + #{amount},
-  					#{balance},
+  				<when test="type == '입금'">
+  					(SELECT BALANCE FROM PRODUCT_INFO WHERE ACCOUNT_NUMBER = #{receiveNumber}) + #{amount},
   					#{type}
-  					</when>
-  					<otherwise>
-  					(SELECT BALANCE FROM PRODUCT_INFO WHERE product_info_id = #{product_info_id)}) - #{amount},
-  					#{balance},
+  				</when>
+  				<otherwise>
+  					(SELECT BALANCE FROM PRODUCT_INFO WHERE product_info_id = #{product_info_id}) - #{amount},
   					#{type}
-  					</otherwise>
-  				</choose>
-
+  				</otherwise>
+  				</choose>	
   			)
   	</insert>
   	
   	<update id="update" parameterType="TransferDTO">
-  		<!--if문 type가 '입금'이면~ , '출금'이면~  -->
   		UPDATE PRODUCT_INFO SET 
-  		<if test="type =='입금'">
-  		BALANCE = BALANCE + #{amount}
-  		WHERE PRODUCT_INFO_ID = #{product_info_id} <!-- 받는계좌 id -->
+  		<if test="type == '입금'">
+	  		BALANCE = BALANCE + #{amount}
+	  		WHERE ACCOUNT_NUMBER = #{receiveNumber}
   		</if>
-  		
+  			
   		<if test="type == '출금'">
-  		BALANCE = BALANCE - #{amount}
-  		WHERE PRODUCT_INFO_ID = #{product_info_id}
+  			BALANCE = BALANCE -#{amount}
+	  		WHERE PRODUCT_INFO_ID =#{product_info_id}
   		</if>
   	</update>
-  	
-
-  </mapper>
+</mapper>

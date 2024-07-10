@@ -25,12 +25,12 @@ public class TransferDTO {
 	private String type;
 	
 	//받는계좌번호
-	private Integer receiveNumber;
+	private String receiveNumber;
 	
-	public Integer getReceiveNumber() {
+	public String getReceiveNumber() {
 		return receiveNumber;
 	}
-	public void setReceiveNumber(Integer receiveNumber) {
+	public void setReceiveNumber(String receiveNumber) {
 		this.receiveNumber = receiveNumber;
 	}
 	// 계좌테이블 dto

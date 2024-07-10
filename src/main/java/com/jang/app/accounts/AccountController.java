@@ -1,6 +1,7 @@
 package com.jang.app.accounts;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -70,43 +71,24 @@ public class AccountController {
 	
 	@RequestMapping(value="transfer", method= RequestMethod.GET)
 	public void transfer(AccountDTO accountDTO, Model model) throws Exception {
-//		accountDTO = accountService.detail(accountDTO);
-//		model.addAttribute("accountNum",accountDTO);
+
 	}
 	
 	@RequestMapping(value = "transfer", method= RequestMethod.POST)
-	public void transfer (TransferDTO transferdto) throws Exception {
+	public String transfer (TransferDTO transferdto) throws Exception {
 		// tranasferdto : 계좌번호가 1개
 		// 보내는 계좌 : account_number
 		// 받는 계좌 : receive_number
 		
-		transferService.trade(transferdto);
-//		int result = transferService.trade(transferdto);
-//		return "redirect:../member/mypage";
-	}
-
-//	@RequestMapping(value = "transfer", method= RequestMethod.POST)
-//	public void transfer(AccountDTO accountDTO  ,HttpSession session, HttpServletRequest request) throws Exception {
-//		
-////		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-////		memberDTO = memberService.detail(memberDTO);
-//		
-//		accountDTO = accountService.detail(accountDTO);
-//		System.out.println(accountDTO.getAccount_number());
-//		
-//		String user = request.getParameter("balance");
-//		System.out.println("=================");
-//		System.out.println(request.getParameter("my_account_number"));
-//	
-//		//계좌가 있는지 파악
-//		//상대 계좌
-//		if(accountDTO.getAccount_number().equals(request.getParameter("account_number"))){
-////			accountDTO.setBalance((Integer)user);
-////			
-////			accountService.update(accountDTO);
-//		}
-//	}
-
-	
+		System.out.println("======controller ======");
+		int result = transferService.trade(transferdto);
 		
+		return "redirect:../member/mypage";
+	}
+	
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public void list(ListOption listOption, Model model) throws Exception {
+		List<TransferDTO> ar = accountService.list(listOption);
+		model.addAttribute("list", ar);
+	}
 }

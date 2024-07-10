@@ -1,8 +1,12 @@
 package com.jang.app.accounts;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.jang.app.transfers.TransferDTO;
 
 @Repository
 public class AccountDAO {
@@ -20,11 +24,7 @@ public class AccountDAO {
 		return sqlSession.selectOne(NAMESPACE + "detail", accountDTO);
 	}
 	
-//	public int transfer(AccountDTO accountDTO) throws Exception {
-//		return sqlSession.update(NAMESPACE + "transfer", accountDTO);
-//	}
-//	
-//	public int update(AccountDTO accountDTO) throws Exception {
-//		return sqlSession.update(NAMESPACE + "update", accountDTO);
-//	}
+	public List<TransferDTO> list(ListOption listOption) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "list", listOption);
+	}
 }

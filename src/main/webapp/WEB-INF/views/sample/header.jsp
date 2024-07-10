@@ -21,10 +21,7 @@
         
         <c:choose>
 	        <c:when test="${not empty member}">
-	        <li class="nav-item">
-	 			<a class="nav-link" href="/account/transfer">이체</a>
-	        </li>
-	        
+     
 	        <li class="nav-item">
 	 			<a class="nav-link" href="/product/list">상품리스트</a>
 	        </li>
