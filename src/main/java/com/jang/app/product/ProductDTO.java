@@ -6,7 +6,7 @@ public class ProductDTO {
 	private String product_type;
 	private double product_rate;
 	private String product_detail;
-	
+
 	public Integer getProduct_id() {
 		return product_id;
 	}

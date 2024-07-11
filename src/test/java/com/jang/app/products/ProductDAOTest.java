@@ -15,6 +15,42 @@ public class ProductDAOTest extends DefaultTest {
 	private ProductDAO productDAO;
 	
 	@Test
+	public void pageTest() {
+		
+		// 소수점이 나오면 -> +1 시켜준다
+		// totalPage =(15.6/10)+1 = 16
+		
+		
+		
+		long perPage = 10L;
+		long totalCount = 154;
+		long totalPage = totalCount/perPage;
+		
+		
+
+		if(totalCount % perPage != 0) {
+			totalPage++;
+		}
+	
+		System.out.println(totalPage);
+	}
+	
+	
+//	@Test
+	public void addTest() throws Exception {
+		ProductDTO productDTO = new ProductDTO();
+		for(int i=0; i<100; i++) {
+			productDTO.setProduct_type("주택" + i);
+			double r = ((int)(Math.random()*1000))/100.0;
+			productDTO.setProduct_rate(r);
+			productDTO.setProduct_detail("상세설명" + i);
+			productDAO.add(productDTO);
+			Thread.sleep(500);
+		}
+		System.out.println("Fisnish");
+	}
+	
+//	@Test
 	public void getDetailTest() throws Exception{
 		ProductDTO productDTO = new ProductDTO();
 		

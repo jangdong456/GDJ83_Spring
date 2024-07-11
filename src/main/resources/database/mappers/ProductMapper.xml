@@ -9,10 +9,27 @@
 	<!--  namespace 다른애랑 중복되면 안되니까 명시해준다 -->
 	
 	<mapper namespace ="com.jang.app.product.ProductDAO">
-	
 		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
-		<select id="getList" resultType="ProductDTO">
-			SELECT * FROM PRODUCT
+		
+		<select id="getTotalCount" resultType="java.lang.Long">
+			SELECT COUNT(PRODUCT_ID) FROM PRODUCT
+		</select>
+		
+		
+		
+		<select id="getList" resultType="ProductDTO" parameterType="java.util.List">
+			<![CDATA[
+			SELECT * FROM
+				(
+				SELECT ROWNUM R, B.* FROM
+					(
+					SELECT  * FROM PRODUCT
+					ORDER BY PRODUCT_ID DESC
+					) B
+				)
+			   
+			WHERE R BETWEEN #{list[0]} AND #{list[1]} 
+			]]>
 		</select>
 		
 		<!--  매개변수 받아야 할 때 : parameterType="패키지명.클래스명" 
