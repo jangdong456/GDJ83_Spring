@@ -47,7 +47,8 @@ public class ProductService {
 		List<Long> ar = new ArrayList<Long>();
 		ar.add(startRow);
 		ar.add(lastRow);
-
+		
+		// 1. 총 갯수로 총페이지수 구하기
 		long totalCount = productDAO.getTotalCount();
 		long totalPage = totalCount/perPage;
 		System.out.println("======TotalPage =======");
