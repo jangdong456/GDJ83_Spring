@@ -21,11 +21,11 @@
 			</thead>
 			
 			<tbody>
-				<c:forEach items="${list}" var="dto">
+				<c:forEach items="${map.list}" var="map">
 					<tr>
-						<td>${dto.product_id}</td>
-						<td><a href="detail?product_id=${dto.product_id}">${dto.product_type}</a></td>
-						<td>${dto.product_rate}</td>
+						<td>${map.product_id}</td>
+						<td><a href="detail?product_id=${map.product_id}">${map.product_type}</a></td>
+						<td>${map.product_rate}</td>
 					</tr>
 				</c:forEach>		
 			</tbody>
@@ -33,18 +33,25 @@
 	</div>
 		<nav aria-label="Page navigation example">
 	  <ul class="pagination">
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Previous">
+	  
+	  
+
+	  
+		<li class="page-item ${map.pre?'':'disabled'}">
+		  <a class="page-link" href="./list?page=${map.startNum-1}" aria-label="Previous">
 	        <span aria-hidden="true">&laquo;</span>
-	      </a>
+	      </a>  
 	    </li>
-	    <li class="page-item"><a class="page-link" href="list?page=1">1</a></li>
-	    <li class="page-item"><a class="page-link" href="list?page=2">2</a></li>
-	    <li class="page-item"><a class="page-link" href="list?page=3">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#" aria-label="Next">
-	        <span aria-hidden="true">&raquo;</span>
-	      </a>
+	
+	    <!--  for(int i=0; i<=10; i=i+2-->
+	    <c:forEach begin="${map.startNum}" end="${map.lastNum}" step="1" var="i">
+	    	<li class="page-item"><a class="page-link" href="list?page=${i}">${i}</a></li>    
+	    </c:forEach>
+	
+		<li class="page-item ${map.next?'':'disabled'}">
+			<a class="page-link" href="./list?page=${map.lastNum+1}" aria-label="Next">
+	        	<span aria-hidden="true">&raquo;</span>
+	     	</a>
 	    </li>
 	  </ul>
 	</nav>
