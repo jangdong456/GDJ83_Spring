@@ -38,12 +38,12 @@ public class ProductService {
 		// 첫번째 숫자 1    11    21
 		// 두번째 숫자 10   20    30
 		
-		// startRow = (page-1) * perPage + 1
+		
 		//한페이지에 10개씩 할때
 		long perPage = 10L;
-		long startRow = page * 10-9;
-		long lastRow = page * 10;
-		
+		long startRow = (page - 1) * perPage + 1;
+		long lastRow = page * perPage;
+			
 		List<Long> ar = new ArrayList<Long>();
 		ar.add(startRow);
 		ar.add(lastRow);
