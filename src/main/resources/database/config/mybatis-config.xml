@@ -16,6 +16,7 @@
  		<typeAlias type="com.jang.app.accounts.AccountDTO" alias="AccountDTO"/>
  		<typeAlias type="com.jang.app.transfers.TransferDTO" alias="TransferDTO"/>
  		<typeAlias type="com.jang.app.accounts.ListOption" alias="ListOption"/>
+ 		<typeAlias type="com.jang.app.util.Pager" alias="Pager"/>
  		
  		
  	</typeAliases>

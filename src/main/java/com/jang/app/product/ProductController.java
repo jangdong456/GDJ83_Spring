@@ -16,10 +16,10 @@ public class ProductController {
 	private ProductService productService;
 	
 	@RequestMapping("list")
-	public void getList(Long page, Model model) throws Exception {
+	public void getList(Long page, String kind, String search, Model model) throws Exception {
 		System.out.println("====== Controller =======");
-
-		Map<String, Object> map = productService.getList(page);
+		
+		Map<String, Object> map = productService.getList(page,kind,search);
 
 		model.addAttribute("map", map);
 	}

@@ -11,25 +11,47 @@
 	<mapper namespace ="com.jang.app.product.ProductDAO">
 		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
 		
-		<select id="getTotalCount" resultType="java.lang.Long">
+		<select id="getTotalCount" resultType="java.lang.Long" parameterType="Pager">
 			SELECT COUNT(PRODUCT_ID) FROM PRODUCT
+				<where> 
+				PRODUCT_ID > 0
+						
+				<choose>
+					<when test="kind == 'k1'">
+						AND PRODUCT_TYPE LIKE '%'||#{search}||'%'
+					</when>
+					<otherwise>
+						AND PRODUCT_DETAIL LIKE '%'||#{search}||'%'
+					</otherwise>
+				</choose>
+				</where>
 		</select>
 		
 		
 		
-		<select id="getList" resultType="ProductDTO" parameterType="java.util.List">
-			<![CDATA[
+		<select id="getList" resultType="ProductDTO" parameterType="Pager">
 			SELECT * FROM
 				(
 				SELECT ROWNUM R, B.* FROM
 					(
 					SELECT  * FROM PRODUCT
+					<where> 
+						PRODUCT_ID > 0
+						<choose>
+							<when test="kind == 'k1'">
+								AND PRODUCT_TYPE LIKE '%'||#{search}||'%'
+							</when>
+							<otherwise>
+								AND PRODUCT_DETAIL LIKE '%'||#{search}||'%'
+							</otherwise>
+						</choose>
+					</where>
 					ORDER BY PRODUCT_ID DESC
 					) B
 				)
 			   
-			WHERE R BETWEEN #{list[0]} AND #{list[1]} 
-			]]>
+			WHERE R BETWEEN #{startRow} AND #{lastRow} 
+<!-- 			<![CDATA[]]> -->
 		</select>
 		
 		<!--  매개변수 받아야 할 때 : parameterType="패키지명.클래스명" 

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jang.app.util.Pager;
+
 
 @Repository
 public class ProductDAO {
@@ -19,15 +21,15 @@ public class ProductDAO {
 	
 	private final String NAMESPACE= "com.jang.app.product.ProductDAO.";
 	
-	public List<ProductDTO> getList(List<Long> ar) throws Exception {
+	public List<ProductDTO> getList(Pager pager) throws Exception {
 		// selectOne :  값이 1나 일 때
 		// selectList : 값이 여러개 일 때 | DTO가 여러개인데 나머진 메소드가 알아서 해줌
-		return sqlSession.selectList(NAMESPACE+"getList", ar);
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
 
 	}
 	
-	public Long getTotalCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getTotalCount");
+	public Long getTotalCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
 	}
 	
 	public ProductDTO detail(ProductDTO product_id) throws Exception {
