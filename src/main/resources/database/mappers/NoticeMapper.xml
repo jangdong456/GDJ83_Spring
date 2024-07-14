@@ -4,35 +4,128 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jang.app.notice.NoticeDAO">
+
+	<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
+		SELECT COUNT(BOARD_NUM) FROM NOTICE
+				<where> 
+				BOARD_NUM > 0
+						
+				<choose>
+					<when test="kind == 'k1'">
+						AND BOARD_TITLE LIKE '%'||#{search}||'%'
+					</when>
+					<when test="kind == 'k2'">
+						AND BOARD_CONTENTS LIKE '%'||#{search}||'%'
+					</when>
+					<otherwise>
+						AND BOARD_WRITER LIKE '%'||#{search}||'%'
+					</otherwise>
+				</choose>
+				</where>
 	
-	<select id="list" parameterType="NoticeDTO" resultMap="noticeList">
-		SELECT * 
-		FROM
-			NOTICE
-			INNER JOIN
-			MEMBERS
-			ON NOTICE.BOARD_WRITER = MEMBERS.M_ID
-		WHERE MEMBERS.M_ID = #{m_id}
+	</select>
+	
+	<select id="list" parameterType="Pager" resultType="NoticeDTO">
+		SELECT * FROM
+			(
+			SELECT ROWNUM R, B.* FROM
+				(
+				SELECT  * FROM NOTICE
+				<where> 
+					BOARD_NUM > 0
+					<choose>
+						<when test="kind == 'k1'">
+							AND BOARD_TITLE LIKE '%'||#{search}||'%'
+						</when>
+						<when test="kind == 'k2'">
+							AND BOARD_CONTENTS LIKE '%'||#{search}||'%'
+						</when>
+						<otherwise>
+							AND BOARD_WRITER LIKE '%'||#{search}||'%'
+						</otherwise>
+					</choose>
+				</where>
+				ORDER BY BOARD_NUM DESC
+				) B
+			)
+		WHERE R BETWEEN #{startRow} AND #{lastRow} 
+	</select>
+
+	
+<!-- 	<select id="list" parameterType="NoticeDTO" resultMap="noticeList"> -->
+<!-- 		SELECT *  -->
+<!-- 		FROM -->
+<!-- 			NOTICE -->
+<!-- 			INNER JOIN -->
+<!-- 			MEMBERS -->
+<!-- 			ON NOTICE.BOARD_WRITER = MEMBERS.M_ID -->
+<!-- 		WHERE MEMBERS.M_ID = #{m_id} -->
+<!-- 	</select> -->
+	
+	<select id="detail" parameterType="NoticeDTO" resultType="NoticeDTO">
+		SELECT * FROM NOTICE
+		WHERE BOARD_NUM = #{board_num}
 	</select>
 	
 	
 	<!--  누가 1이고 누가 N인지 살펴보기  -->
 	
 	<resultMap type="NoticeDTO" id="noticeList">
+
+<!-- 		<id column="M_ID" property="m_id"/> -->
+<!-- 		<result column = "MEMBER_NAME" property="member_name"/> -->
+<!-- 		<result column = "MEMBER_NUMBER" property="member_number"/> -->
+<!-- 		<result column = "PHONE" property="phone"/> -->
+<!-- 		<result column = "EMAIL" property="email"/> -->
+<!-- 		<result column = "MEMBER_ID" property="member_id"/> -->
+<!-- 		<result column = "MEMBER_PWD" property="member_pwd"/> -->
+		
+<!-- 		<collection property="dtos" javaType ="java.util.List" ofType="MemberDTO"> -->
+<!-- 			<id column="BOARD_NUM" property="board_num"/> -->
+<!-- 			<result column="M_ID" property="m_id"/> -->
+<!-- 			<result column="BOARD_TITLE" property="board_title"/> -->
+<!-- 			<result column="BOARD_CONTENTS" property="board_contents"/> -->
+<!-- 			<result column="CREATE_DATE" property="create_date"/> -->
+<!-- 			<result column="UPDATE_DATE" property="update_date"/> -->
+<!-- 			<result column="BOARD_CATEGORY" property="board_category"/> -->
+<!-- 			<result column="BOARD_HIT" property="board_hit"/> -->
+<!-- 		</collection> -->
+		
+		
 		<id column="BOARD_NUM" property="board_num"/>
-		<result />
-		
-		
-		<!-- N -->
-		<collection property="">
-		
-		</collection>
-	
+		<result column="M_ID" property="m_id"/>
+		<result column="BOARD_TITLE" property="board_title"/>
+		<result column="BOARD_CONTENTS" property="board_contents"/>
+		<result column="CREATE_DATE" property="create_date"/>
+		<result column="UPDATE_DATE" property="update_date"/>
+		<result column="BOARD_CATEGORY" property="board_category"/>
+		<result column="BOARD_HIT" property="board_hit"/>
+
+		<collection property="dtos" javaType ="java.util.List" ofType="MemberDTO">	
+			<id column="M_ID" property="m_id"/>
+			<result column = "MEMBER_NAME" property="member_name"/>
+			<result column = "MEMBER_NUMBER" property="member_number"/>
+			<result column = "PHONE" property="phone"/>
+			<result column = "EMAIL" property="email"/>
+			<result column = "MEMBER_ID" property="member_id"/>
+			<result column = "MEMBER_PWD" property="member_pwd"/>
+		</collection>		
+
 	</resultMap>
 	
-	<insert id="add">
+	<insert id="add" parameterType="NoticeDTO">
 		INSERT INTO NOTICE
-		VALUES (BOARD_SEQ.NEXTVAL,10,'테스트','내용 아무거나 테스트',SYSDATE, SYSDATE,'1',0);
+		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE, '1', 0)
 	</insert>
+
+	<update id="update" parameterType="NoticeDTO">
+		UPDATE NOTICE SET BOARD_TITLE =#{board_title}, BOARD_CONTENTS =#{board_contents}
+		WHERE BOARD_NUM = #{board_num}
+	</update>
 	
+	<delete id="delete" parameterType="NoticeDTO">
+		DELETE FROM NOTICE 
+		WHERE BOARD_NUM = #{board_num}
+	</delete>
+
 </mapper>

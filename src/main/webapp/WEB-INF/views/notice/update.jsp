@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,28 +10,25 @@
 </head>
 <body>
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
-		<div class="container mt-5">
+		<div class="container">
 		<div class="row">
 			<div class="row">
-				<h1>글작성</h1>			
+				<h1>수정폼</h1>			
 			</div>
-			<form action="./add" method="post">
-
-<!-- 			  <div class="mb-3"> -->
-<!-- 			    <input type="text" class="form-control" id="m_id" name="m_id"> -->
-<!-- 			  </div> -->
-			  
+			<form action="./update" method="post">
+				<input type="hidden" name= "board_num" value= "${dto.board_num}">
+			
 			  <div class="mb-3">
 			    <label for="board_title" class="form-label">제목</label>
-			    <input type="text" class="form-control" id="board_title" name="board_title">
+			    <input type="text" value="${dto.board_title}" class="form-control" id="board_title" name="board_title">
 			  </div>
 			  
 			  <div class="mb-3">
 			    <label for="board_contents" class="form-label">내용</label>
-			    <input type="text" class="form-control form-control-lg"  id="board_contents" name="board_contents">
+			    <input type="text" value="${dto.board_contents}" class="form-control" id="board_contents" name="board_contents">
 			  </div>
-
-			  <button type="submit" class="btn btn-primary">글쓰기</button>
+			  
+			  <button type="submit" class="btn btn-primary">수정하기</button>
 			</form>
 		</div>
 	</div>

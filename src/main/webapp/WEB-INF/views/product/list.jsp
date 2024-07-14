@@ -31,18 +31,11 @@
 		    </div>
 		  </div>
 		
-
-		
-		
 		  <div class="col-12">
 		    <button type="submit" class="btn btn-primary">Submit</button>
 		  </div>
 		</form>
-	
-	
-	
-	
-	
+
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>

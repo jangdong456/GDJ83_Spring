@@ -8,7 +8,8 @@ import com.jang.app.members.MemberDTO;
 public class NoticeDTO {
 	
 	private Long board_num;
-	private Integer m_id;
+	private Integer board_writer;
+	//	private Integer m_id;
 	private String board_title;
 	private String board_contents;
 	private Date create_date;
@@ -16,6 +17,13 @@ public class NoticeDTO {
 	private String board_category;
 	private Long board_hit;
 	private List<MemberDTO> dtos;
+
+	public Integer getBoard_writer() {
+		return board_writer;
+	}
+	public void setBoard_writer(Integer board_writer) {
+		this.board_writer = board_writer;
+	}
 	
 	public List<MemberDTO> getDtos() {
 		return dtos;
@@ -30,12 +38,12 @@ public class NoticeDTO {
 		this.board_num = board_num;
 	}
 
-	public Integer getM_id() {
-		return m_id;
-	}
-	public void setM_id(Integer m_id) {
-		this.m_id = m_id;
-	}
+//	public Integer getM_id() {
+//		return m_id;
+//	}
+//	public void setM_id(Integer m_id) {
+//		this.m_id = m_id;
+//	}
 	public String getBoard_title() {
 		return board_title;
 	}

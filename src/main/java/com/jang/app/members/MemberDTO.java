@@ -3,6 +3,7 @@ package com.jang.app.members;
 import java.util.List;
 
 import com.jang.app.accounts.AccountDTO;
+import com.jang.app.notice.NoticeDTO;
 
 public class MemberDTO {
 	
@@ -14,7 +15,9 @@ public class MemberDTO {
 	private String member_id;
 	private String member_pwd;
 	private List<AccountDTO> dtos;
+
 	
+
 	public List<AccountDTO> getDtos() {
 		return dtos;
 	}
