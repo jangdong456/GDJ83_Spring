@@ -16,7 +16,15 @@
  		<typeAlias type="com.jang.app.accounts.AccountDTO" alias="AccountDTO"/>
  		<typeAlias type="com.jang.app.transfers.TransferDTO" alias="TransferDTO"/>
  		<typeAlias type="com.jang.app.accounts.ListOption" alias="ListOption"/>
- 		<typeAlias type="com.jang.app.notice.NoticeDTO" alias="NoticeDTO"/>
+
+ 		
+ 		
+  		<typeAlias type="com.jang.app.notice.NoticeDTO" alias="NoticeDTO"/>
+ 		<typeAlias type="com.jang.app.notice.boards.BoardDTO" alias="BoardDTO"/>
+ 		<typeAlias type="com.jang.app.notice.qna.QnaDTO" alias="QnaDTO"/>
+ 
+ 		
+ 		
  		<typeAlias type="com.jang.app.util.Pager" alias="Pager"/>
  		
  		

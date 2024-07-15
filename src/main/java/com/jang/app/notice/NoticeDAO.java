@@ -13,7 +13,7 @@ public class NoticeDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private final String NAMESPAVE = "com.jang.app.notice.NoticeDAO.";
+	private final String NAMESPAVE = "com.jang.app.boards.notice.NoticeDAO.";
 	
 	public List<NoticeDTO> list(Pager pager) throws Exception {
 		System.out.println("=====List DAO ====");

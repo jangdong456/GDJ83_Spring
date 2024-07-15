@@ -1,19 +1,17 @@
 package com.jang.app.notice;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jang.app.members.MemberDTO;
-import com.jang.app.members.MemberService;
+import com.jang.app.util.Pager;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -23,14 +21,15 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public void list(Model model, HttpSession session, NoticeDTO noticedto, Long page, String kind, String search) throws Exception {
+	public void list(Model model,Pager pager) throws Exception {
 		System.out.println("===== List Controller ====");
 //		MemberDTO mId = (MemberDTO)session.getAttribute("member");
 //		noticedto.setM_id(mId.getM_id());
 
-		Map<String, Object> map = noticeService.list(noticedto,page,kind,search);
+		List<NoticeDTO> list = noticeService.list(pager);
 	
-		model.addAttribute("map",map);
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.GET)
