@@ -24,7 +24,7 @@
 				<tr>
 					<td>${dto.board_num}</td>
 					<td>${dto.board_title}</td>				
-					<td>${dto.m_id}</td>					
+					<td>${dto.board_writer}</td>					
 					<td>${dto.create_date}</td>
 					<td>${dto.board_hit}</td>
 					<td>${dto.board_contents}</td>
