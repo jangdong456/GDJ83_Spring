@@ -1,9 +1,9 @@
-package com.jang.app.notice;
+package com.jang.app.boards.notice;
 
 import java.util.List;
 
+import com.jang.app.boards.BoardDTO;
 import com.jang.app.members.MemberDTO;
-import com.jang.app.notice.boards.BoardDTO;
 
 public class NoticeDTO extends BoardDTO {
 	

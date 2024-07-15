@@ -1,6 +1,6 @@
-package com.jang.app.notice.qna;
+package com.jang.app.boards.qna;
 
-import com.jang.app.notice.boards.BoardDTO;
+import com.jang.app.boards.BoardDTO;
 
 public class QnaDTO extends BoardDTO{
 	// NoticeDTO와 동일하니 상속시킨다.

@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jang.app.notice.NoticeDAO">
+<mapper namespace="com.jang.app.boards.notice.NoticeDAO">
 
 	<select id="getTotalCount" parameterType="Pager" resultType="java.lang.Long">
 		SELECT COUNT(BOARD_NUM) FROM NOTICE
@@ -62,7 +62,7 @@
 <!-- 		WHERE MEMBERS.M_ID = #{m_id} -->
 <!-- 	</select> -->
 	
-	<select id="detail" parameterType="NoticeDTO" resultType="NoticeDTO">
+	<select id="detail" parameterType="boardDTO" resultType="NoticeDTO">
 		SELECT * FROM NOTICE
 		WHERE BOARD_NUM = #{board_num}
 	</select>
@@ -70,7 +70,7 @@
 	
 	<!--  누가 1이고 누가 N인지 살펴보기  -->
 	
-	<resultMap type="NoticeDTO" id="noticeList">
+	<resultMap type="boardDTO" id="noticeList">
 
 <!-- 		<id column="M_ID" property="m_id"/> -->
 <!-- 		<result column = "MEMBER_NAME" property="member_name"/> -->
@@ -113,17 +113,17 @@
 
 	</resultMap>
 	
-	<insert id="add" parameterType="NoticeDTO">
+	<insert id="add" parameterType="boardDTO">
 		INSERT INTO NOTICE
 		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE, '1', 0)
 	</insert>
 
-	<update id="update" parameterType="NoticeDTO">
+	<update id="update" parameterType="boardDTO">
 		UPDATE NOTICE SET BOARD_TITLE =#{board_title}, BOARD_CONTENTS =#{board_contents}
 		WHERE BOARD_NUM = #{board_num}
 	</update>
 	
-	<delete id="delete" parameterType="NoticeDTO">
+	<delete id="delete" parameterType="boardDTO">
 		DELETE FROM NOTICE 
 		WHERE BOARD_NUM = #{board_num}
 	</delete>

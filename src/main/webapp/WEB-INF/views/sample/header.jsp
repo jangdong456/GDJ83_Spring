@@ -12,9 +12,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/product/list">금융상품</a>
         </li>
+        <li class="nav-item">
+	 		<a class="nav-link" href="/qna/list">QnA</a>
+	    </li>
         
         <c:choose>
 	        <c:when test="${not empty member}">
+	        
+
 	        
 	        <li class="nav-item">
 	 			<a class="nav-link" href="/notice/list">공지사항</a>

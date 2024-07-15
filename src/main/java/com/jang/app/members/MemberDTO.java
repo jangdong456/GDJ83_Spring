@@ -3,7 +3,7 @@ package com.jang.app.members;
 import java.util.List;
 
 import com.jang.app.accounts.AccountDTO;
-import com.jang.app.notice.NoticeDTO;
+import com.jang.app.boards.notice.NoticeDTO;
 
 public class MemberDTO {
 	
