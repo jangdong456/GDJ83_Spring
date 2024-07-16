@@ -12,8 +12,9 @@
 <c:import url="/WEB-INF/views/sample/header.jsp"></c:import>
 	<div class="row col-md-4 ms-5 mt-5">
 	
+	<h1>${board}</h1>
 	<form action="./list" method ="get" class="row row-cols-lg-auto g-3 align-items-center">
-				 
+			
 			<div class="col-12">
 			    <label class="visually-hidden" for="inlineFormSelectPref">Preference</label>
 			    <select name="kind" class="form-select" id="inlineFormSelectPref">
@@ -44,16 +45,35 @@
 				<th>생성일</th>
 				<th>수정일</th>
 				<th>조회수</th>
-<%-- 				<c:forEach items="${list.dtos}" var = "m">					 --%>
-<%-- 					<td>${m.member_id}</td> --%>
-<%-- 				</c:forEach> --%>
 			</tr>
 		</thead>
+
 		<tbody>
 			<c:forEach items="${list}" var="map">
 				<tr>
-					<td>${map.board_num}</td>
-					<td><a href="./detail?board_num=${map.board_num}">${map.board_title}</a></td>				
+					<td>
+						<c:if test="${map.del eq 0}">
+						${map.board_num}
+						</c:if>
+					</td>
+
+					<td>
+						<c:choose>
+							<c:when test="${map.del eq 0}">
+								<a href="./detail?board_num=${map.board_num}">
+								<c:catch>
+									<c:forEach begin="1" end="${map.depth}">--</c:forEach>
+								</c:catch>
+								${map.board_title}
+								</a>							
+							</c:when>
+							<c:otherwise>
+								글이 삭제되었습니다
+							</c:otherwise>
+						</c:choose>
+
+
+					</td>				
 					<td>${map.board_writer}</td>					
 					<td>${map.create_date}</td>
 					<td>${map.update_date}</td>
@@ -87,6 +107,7 @@
 	
 	
 	<div>
+		
 		<a href="add" class="btn btn-primary" role="button">글쓰기</a>
 	</div>
 

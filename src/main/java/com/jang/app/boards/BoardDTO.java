@@ -12,6 +12,17 @@ public class BoardDTO {
 	private Date update_date;
 	private Long board_hit;
 	private String board_category;
+	private Integer del;
+	
+	public Integer getDel() {
+		if(this.del == null) {
+			this.del = 0;
+		}
+		return del;
+	}
+	public void setDel(Integer del) {
+		this.del = del;
+	}
 	
 	public Long getBoard_num() {
 		return board_num;

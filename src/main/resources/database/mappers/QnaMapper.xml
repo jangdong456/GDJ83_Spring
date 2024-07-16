@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jang.app.boards.qna.QnaDAO">
+	
+	<sql id="searchSql">
+		<where>
+			BOARD_NUM > 0
+			<choose>
+				<when test="kind =='k1'">
+					AND BOARD_TITLE
+				</when>
+				<when test="kind=='k2'">
+					AND BOARD_CONTENTS
+				</when>
+				<otherwise>
+					AND BOARD_WRITER
+				</otherwise>
+			</choose>
+			<!-- 반복되는 코드라 밑으로 빼줌 -->
+			LIKE '%'||#{search}||'%'
+		</where>
+	</sql>
+	
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(BOARD_NUM) FROM QNA
+		<include refid="searchSql"></include>
+	</select>
+	
+	<select id="list" parameterType="Pager" resultType="QnaDTO">
+	SELECT * FROM 	
+		(
+			SELECT ROWNUM R, Q.* FROM
+			(
+				SELECT * FROM QNA  
+				<include refid="searchSql"></include>
+
+				ORDER BY REF DESC, STEP ASC
+				)Q
+			)
+			WHERE R BETWEEN #{startRow} AND #{lastRow}	
+	</select>
+
+	<insert id="add" parameterType="QnaDTO">
+		INSERT INTO QNA
+		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE,
+		 '1', 0, BOARD_SEQ.CURRVAL, 0, 0, 0)
+	</insert> 
+	
+	<select id="detail" parameterType="QnaDTO" resultType="QnaDTO">
+		SELECT * FROM QNA
+		WHERE BOARD_NUM = #{board_num} AND DEL=0
+	</select>
+	
+	<insert id="reply" parameterType="QnaDTO">
+		INSERT INTO QNA
+		VALUES 
+		(
+			BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE,
+		 	'1', 0, #{ref}, #{step}, #{depth}
+		 )
+	</insert>
+	
+	<update id="replyUpdate" parameterType="QnaDTO">
+		UPDATE QNA SET STEP = STEP +1
+		WHERE REF= #{ref} AND STEP > #{step}
+	</update>
+	
+	<update id="update" parameterType="QnaDTO">
+		UPDATE QNA SET BOARD_TITLE = #{board_title}, BOARD_CONTENTS = #{board_contents}, UPDATE_DATE = SYSDATE
+		WHERE BOARD_NUM = #{board_num}
+	</update>
+	
+<!-- 	delete 문인데  쿼리문을 보면 update 써도 되는 이유는 -->
+<!-- 	반환 값이 어차피 int이기 때문에 mybatice에서는 신경을 안쓴다. -->
+<!-- 	그냥 개발자가 구분하기 쉽게 태그를 나눈거 같다. -->
+	<delete id="delete" parameterType="QnaDTO">
+		UPDATE QNA SET DEL=1 
+		WHERE BOARD_NUM = #{board_num}
+	</delete>
+	
+</mapper>

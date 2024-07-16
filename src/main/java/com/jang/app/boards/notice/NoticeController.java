@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,6 +24,12 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@ModelAttribute("board")
+	public String getBoard() {
+		// 리턴하는 값이 value가 된다.
+		return "Notice";
+	}
+	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list(Model model,Pager pager) throws Exception {
 		System.out.println("===== List Controller ====");
@@ -28,7 +37,8 @@ public class NoticeController {
 //		noticedto.setM_id(mId.getM_id());
 
 		List<BoardDTO> list = noticeService.list(pager);
-	
+		
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		
@@ -51,7 +61,7 @@ public class NoticeController {
 		int result = noticeService.add(noticedto);
 		
 		if(result>0) {
-			url = "redirect:/board/list";
+			url = "redirect:./list";
 			return url;
 		}
 		return url;
@@ -75,12 +85,12 @@ public class NoticeController {
 		return url;
 	}
 	
-	@RequestMapping(value = "update", method = RequestMethod.GET)
+	@GetMapping("update")
 	public String update(NoticeDTO noticeDTO, Model model) throws Exception {
 		System.out.println("===== update Controller =====");
 		BoardDTO boardDTO = noticeService.detail(noticeDTO);
 		
-		String url = "board/update";
+		String url = "board/add";
 		
 		if(boardDTO != null) {
 			System.out.println("값 들어옴");
@@ -93,8 +103,8 @@ public class NoticeController {
 		return url;
 	}
 	
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update2(NoticeDTO noticeDTO) throws Exception {
+	@PostMapping("update")
+	public String update(NoticeDTO noticeDTO) throws Exception {
 		System.out.println("===== update2 Controller =====");
 		int result = noticeService.update(noticeDTO);
 		
