@@ -21,6 +21,8 @@ import com.jang.app.util.Pager;
 @RequestMapping("/qna/*")
 public class QnaController {
 	
+	private String confilct;
+	
 	@Autowired
 	private QnaService qnaService;
 	
