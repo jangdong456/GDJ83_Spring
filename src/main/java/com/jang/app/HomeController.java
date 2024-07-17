@@ -21,8 +21,9 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request) {
-		System.out.println("Main");
+	public String home(HttpServletRequest request) {		
+		System.out.println("Study_Confilct");
+
 		// 하위에서 -> 상위 o 가능함
 		// 상위에서 -> 하위는 X 불가능
 		HttpSession session = request.getSession();
