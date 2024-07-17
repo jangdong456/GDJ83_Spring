@@ -22,6 +22,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
+		System.out.println("Main");
 		// 하위에서 -> 상위 o 가능함
 		// 상위에서 -> 하위는 X 불가능
 		HttpSession session = request.getSession();
