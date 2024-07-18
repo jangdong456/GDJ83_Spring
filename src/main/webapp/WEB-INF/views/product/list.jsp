@@ -6,12 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="/WEB-INF/views/sample/bootHeader.jsp"></c:import>
+
+<c:import url="/WEB-INF/views/templete/header_css.jsp"></c:import>
 </head>
-<body>
-<c:import url = "/WEB-INF/views/sample/header.jsp"></c:import>
+<body id="page-top">
+	<!-- Page Wrapper -->
+    <div id="wrapper">
+    
+    <c:import url="/WEB-INF/views/templete/sidebar.jsp"></c:import>
+    <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+         <!-- Main Content -->
+            <div id="content">
+            <c:import url="/WEB-INF/views/templete/topbar.jsp"></c:import>
+    
+
+
 	<h1>금융상품 리스트</h1>
-	<div class="row col-md-4 ms-5 mt-5">
+	<div class="col-md-10 ms-10 mt-4">
 		<!-- 검색어 입력 폼 -->	
 		<form action="./list" method ="get" class="row row-cols-lg-auto g-3 align-items-center">
 				 
@@ -81,6 +93,10 @@
 	<div>
 		<a href="add" class="btn btn-primary" role="button">상품등록</a>
 	</div>
-<c:import url="/WEB-INF/views/sample/bootFooter.jsp"></c:import>
+	</div>
+	</div>
+	</div>
+	<c:import url="/WEB-INF/views/templete/footerscript.jsp"></c:import>
+
 </body>
 </html>
