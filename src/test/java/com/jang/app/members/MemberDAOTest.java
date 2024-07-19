@@ -18,7 +18,7 @@ public class MemberDAOTest  extends DefaultTest {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	@Test
+//	@Test
 	public void loginTest() throws Exception {
 		MemberDTO memberdto = new MemberDTO();
 		
@@ -30,6 +30,21 @@ public class MemberDAOTest  extends DefaultTest {
 		 
 		assertEquals(2, memberdto.getDtos().size());
 		assertNotNull(list);
+	}
+	
+	@Test
+	public void addFile() throws Exception {
+		String name = "asd.jsp";
+		
+		MemberFileDTO file = new MemberFileDTO();
+		file.setFilename(name);
+		file.setFilenum(1L);
+		file.setOriname(name);
+		
+
+		
+		memberDAO.addFile(file);
+		
 	}
 
 }

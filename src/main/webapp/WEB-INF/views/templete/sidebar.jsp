@@ -37,12 +37,30 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Products:</h6>
+                  
                         <a class="collapse-item" href="product/list">products</a>
                        
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>회원가입</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                
+                        <a class="collapse-item" href="/member/join">회원가입</a>
+                        <a class="collapse-item" href="/member/mypage">마이페이지</a>    
+
+                    </div>
+                </div>
+            </li>
+            
+
+          
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
@@ -55,7 +73,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Board:</h6>
-                        <a class="collapse-item" href="board/list">Notice</a>
+                        <a class="collapse-item" href="member/mypage">Notice</a>
                         <a class="collapse-item" href="board/list">QnA</a>
                         
                     </div>

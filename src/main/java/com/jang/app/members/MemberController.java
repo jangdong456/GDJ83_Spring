@@ -10,8 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+@Controller 
 @RequestMapping("/member/*")
 public class MemberController {
 	
@@ -21,27 +22,30 @@ public class MemberController {
 	@RequestMapping(value ="join", method = RequestMethod.GET)
 	public void join(Model model) {
 		System.out.println("controller");
+		
 	
 //		model.addAttribute("join");
 	}
 	
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public String join2(MemberDTO memberDTO) throws Exception {
-		System.out.println("join@@@@@@@@");
-		int result = memberService.join(memberDTO);
+	public String join2(HttpSession session ,MemberDTO memberDTO, MultipartFile files) throws Exception {
+		System.out.println(session.getServletContext());
+
+		int result = memberService.join(memberDTO, files, session);
 		
-		String url ="";
+		String url ="redirect:/";
 		
-		if(result > 0) {
-			url = "redirect:/";
-		}else {
-			
-		}
+//		if(result > 0) {
+//			url = "redirect:/";
+//		}else {
+//			
+//		}
 		return url;
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public void login(Model model, @CookieValue(name = "remember", required = false) String value) {
+		
 		model.addAttribute("id", value);
 //		Cookie[] cookies = request.getCookies();
 //		for(Cookie c : cookies) {
@@ -94,8 +98,9 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "mypage", method = RequestMethod.GET)
+	@RequestMapping(value ="mypage", method = RequestMethod.GET)
 	public void mypage(HttpSession session, Model model) throws Exception {
+		System.out.println("들어옴?");
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
 
 		memberdto = memberService.detail(memberdto);

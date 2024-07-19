@@ -32,5 +32,13 @@ public class MemberDAO {
 	public MemberDTO detail(MemberDTO memberDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "detail", memberDTO);
 	}
+	
+	public int addFile(MemberFileDTO memberFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "addFile", memberFileDTO);
+	}
+	
+	public MemberDTO find(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "find", memberDTO);
+	}
 
 }

@@ -25,7 +25,8 @@
 			<div class="row">
 				<h1>회원가입</h1>			
 			</div>
-			<form action="./join" method="post">
+			<form action="./join" method="post" enctype="multipart/form-data">
+			
 			  <div class="mb-3">
 			    <label for="member_name" class="form-label">이름</label>
 			    <input type="text" class="form-control" id="member_name" name="member_name">
@@ -62,22 +63,17 @@
 			  
 			  
 			  
-			  <div class="mb-3">
-								<button type="button" id="add" class="btn btn-primary">사진파일추가</button>
-								
-							</div>	
-							
-							<div id="result">
-
-
-							</div>
+			<div class="mb-3">
+			<button type="button" id="add" class="btn btn-primary">사진파일추가</button>
+			</div>	
 			
-			                 
-					 		<div class="mb-3">
-								<button type="button" id="btn" class="btn btn-primary">회원가입</button>
-							</div>
-			  
-			  
+			<div id="result">
+			</div>
+
+	 		<div class="mb-3">
+				<button type="submit" id="btn" class="btn btn-primary">회원가입</button>
+			</div>
+
 			</form>
             </div>
             </div>
@@ -87,7 +83,7 @@
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/templete/footerscript.jsp"></c:import>
-	<script type="text/javascript" src="../resources/js/member/memberJoinCheck.js"></script>
+<!-- 	<script type="text/javascript" src="../resources/js/member/memberJoinCheck.js"></script> -->
 	<script type="text/javascript" src="../resources/js/commons/files.js"></script>
 
 

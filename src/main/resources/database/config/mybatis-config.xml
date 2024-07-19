@@ -19,7 +19,10 @@
 		
  		<typeAlias type="com.jang.app.boards.BoardDTO" alias="BoardDTO"/>
   		<typeAlias type="com.jang.app.boards.notice.NoticeDTO" alias="NoticeDTO"/>
- 		<typeAlias type="com.jang.app.boards.qna.QnaDTO" alias="QnaDTO"/>  		
+ 		<typeAlias type="com.jang.app.boards.qna.QnaDTO" alias="QnaDTO"/> 
+ 		 		
+ 		<typeAlias type="com.jang.app.files.FileDTO" alias="FileDTO"/>  		
+ 		<typeAlias type="com.jang.app.members.MemberFileDTO" alias="MemberFileDTO"/>		
  		
  		<typeAlias type="com.jang.app.util.Pager" alias="Pager"/>
  		

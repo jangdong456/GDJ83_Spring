@@ -4,13 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.jang.app.members.MemberDAO">
+	<select id="find" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT M_ID FROM MEMBERS 
+		WHERE MEMBER_NAME = #{member_name}
+	</select>
+
+ 	<insert id="addFile" parameterType="MemberFileDTO">
+ 		INSERT INTO FILES
+ 		VALUES (FILES_SEQ.NEXTVAL, #{m_id}, #{filename}, #{oriname})
+ 	</insert>
+ 
  	<insert id="join" parameterType="MemberDTO">
  		INSERT INTO MEMBERS
  		VALUES (BANK_SEQ.NEXTVAL, #{member_name}, #{member_number},#{phone},
  		#{email}, #{member_id}, #{member_pwd})
  	</insert>
- 	
-   
+
  	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
  		SELECT M_ID, MEMBER_ID, MEMBER_PWD, MEMBER_NAME
  		FROM MEMBERS
@@ -40,7 +49,14 @@
 		<result column = "EMAIL" property="email"/>
 		<result column = "MEMBER_ID" property="member_id"/>
 		<result column = "MEMBER_PWD" property="member_pwd"/>
- 	
+ 		
+ 		<!-- 1:1 -->
+ 		<association property="memberFileDTO" javaType="memberFileDTO">
+ 			<id column="FILENUM" property="filenum"/>
+ 			<result column="FILENAME" property="filename"/>
+ 			<result column="ORINAME" property="oriname"/>
+ 		</association>
+ 		
 		<!-- (멤버)1:N(계좌) -->
 	
 		<collection property="dtos" javaType="java.util.List" ofType="AccountDTO">

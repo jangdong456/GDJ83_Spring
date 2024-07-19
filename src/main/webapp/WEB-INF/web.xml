@@ -39,10 +39,10 @@
     <filter-name>LoginFilter</filter-name>
     <filter-class>com.jang.app.filters.LoginFilter</filter-class>
   </filter>
-  <filter-mapping>
-    <filter-name>LoginFilter</filter-name>
-    <url-pattern>/member/mypage</url-pattern>
-  </filter-mapping>
+<!--   <filter-mapping> -->
+<!--     <filter-name>LoginFilter</filter-name> -->
+<!--     <url-pattern>/member/mypage</url-pattern> -->
+<!--   </filter-mapping> -->
   
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
