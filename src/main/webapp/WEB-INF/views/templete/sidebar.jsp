@@ -51,13 +51,14 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                
                         <a class="collapse-item" href="/member/join">회원가입</a>
+                        <a class="collapse-item" href="/member/login">로그인</a>    
                         <a class="collapse-item" href="/member/mypage">마이페이지</a>    
-
                     </div>
                 </div>
             </li>
+            
+
             
 
           

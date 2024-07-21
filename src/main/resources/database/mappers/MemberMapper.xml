@@ -29,13 +29,17 @@
  	 
 
  	<select id="detail" parameterType="MemberDTO" resultMap="loginResult">
- 		SELECT M.*, INFO.*
+ 		SELECT M.*, INFO.*, F.*
  		FROM MEMBERS M
  			LEFT JOIN
  			PRODUCT_INFO INFO
  			ON M.M_ID = INFO.M_ID
+ 			LEFT JOIN
+ 			FILES F
+ 			ON M.M_ID = F.M_ID
  		WHERE M.M_ID = ${m_id}
  	</select>
+ 
 	 
 		<!-- id :  primary key 용도
 			column = "컬럼명"

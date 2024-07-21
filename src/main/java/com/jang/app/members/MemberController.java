@@ -100,7 +100,6 @@ public class MemberController {
 	
 	@RequestMapping(value ="mypage", method = RequestMethod.GET)
 	public void mypage(HttpSession session, Model model) throws Exception {
-		System.out.println("들어옴?");
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("member");
 
 		memberdto = memberService.detail(memberdto);
