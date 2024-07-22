@@ -15,6 +15,8 @@ public interface BoardDAO {
 	// add 
 	public int add(BoardDTO boardDTO) throws Exception;
 	
+	public int addFile(BoardFileDTO boardFileDTO) throws Exception;
+	
 	//update
 	int update(BoardDTO boardDTO) throws Exception;
 	
@@ -26,5 +28,4 @@ public interface BoardDAO {
 	
 	//TotalCount
 	public Long getTotalCount(Pager pager) throws Exception;
-	
 }

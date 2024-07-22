@@ -1,8 +1,11 @@
 package com.jang.app.boards;
 
 import java.sql.Date;
+import java.util.List;
 
-public class BoardDTO {
+import com.jang.app.files.FileDTO;
+
+public class BoardDTO extends FileDTO{
 	
 	private Long board_num;
 	private Integer board_writer;
@@ -13,7 +16,14 @@ public class BoardDTO {
 	private Long board_hit;
 	private String board_category;
 	private Integer del;
+	private List<BoardFileDTO> boardFileDTOs;
 	
+	public List<BoardFileDTO> getBoardFileDTOs() {
+		return boardFileDTOs;
+	}
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
+		this.boardFileDTOs = boardFileDTOs;
+	}
 	public Integer getDel() {
 		if(this.del == null) {
 			this.del = 0;

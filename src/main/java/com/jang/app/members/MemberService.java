@@ -1,18 +1,14 @@
 package com.jang.app.members;
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.UUID;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jang.app.accounts.AccountDAO;
+import com.jang.app.files.FileManager;
 
 @Service
 public class MemberService {
@@ -23,6 +19,9 @@ public class MemberService {
 	@Autowired
 	private AccountDAO accountDAO;
 	
+	@Autowired
+	private FileManager fileManager;
+	
 	private String name = "members";
 	
 	public int join(MemberDTO memberDTO, MultipartFile files, HttpSession session)throws Exception {
@@ -32,51 +31,12 @@ public class MemberService {
 		String path = servletContext.getRealPath("resources/upload/members");
 		System.out.println(path);
 		
-		File file = new File(path);
-		
-		if(!file.exists()) {
-			file.mkdirs();
-		}
-		
-		//2-1. 방식1 파일명 ?? -> 중복되지 않기위해서 시간으로 파일명 설정 
-		Calendar calendar = Calendar.getInstance();
-		long n = calendar.getTimeInMillis();
-		
-		//subString
-		String fileName = files.getOriginalFilename();
-		fileName = fileName.substring(fileName.lastIndexOf("."));
-		
-		//splitm StringTokenizer
-//		String[] fileName = name.split("\\.");
-//		name = fileName[fileName.length-1];
-		
-//		System.out.println(name);
-//		name = n+"."+name;
-		
-		fileName = n+"_"+ files.getOriginalFilename();
-		
-		// 2-2.방식2 UUID 라이브러리 사용 
-		fileName = UUID.randomUUID().toString()+"_"+ files.getOriginalFilename();	
-		
-		System.out.println(fileName);
-		
-		
-		//3. HDD에 파일저장
-		file = new File(file, fileName);
-		
-		//1)MultipartFile의 메서드 활용 
-		// files.transferTo(file);
-		
-		// ============================================
-		// 2)FileCopyUtils의 copy([in],[out])활용
-		FileCopyUtils.copy(files.getBytes(), file);
-		
 		int result = memberDAO.join(memberDTO); //성공
 		
-		System.out.println("=========== 진 입 ================");
+
 		MemberDTO test = memberDAO.find(memberDTO);
-		System.out.println(test.getM_id());
-		System.out.println("=========== 끝 ================");
+		
+		String fileName = fileManager.fileSave(path, files);
 		
 		MemberFileDTO memberFileDTO = new MemberFileDTO();
 		memberFileDTO.setM_id(test.getM_id());

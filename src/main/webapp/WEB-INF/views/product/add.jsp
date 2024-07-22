@@ -27,7 +27,7 @@
 			<div class="row">
 				<h1>상품등록</h1>			
 			</div>
-			<form action="./add" method="post">
+			<form action="./add" method="post" enctype="multipart/form-data">
 			  <div class="mb-3">
 			    <label for="product_type" class="form-label">상품명</label>
 			    <input type="text" class="form-control" id="product_type" name="product_type">
@@ -43,11 +43,11 @@
 			    <input type="text" class="form-control" id="product_detail" name="product_detail">
 			  </div>
 
-			  <button type="submit" class="btn btn-primary">등록</button>
 			  <div class="mb-3">
 				<button type="button" id="add" class="btn btn-primary">사진파일추가</button>
-								
+						<div id="result"></div>		
 				</div>	
+			  <button type="submit" class="btn btn-primary">등록</button>
 			</form>
 		</div>
 	</div>

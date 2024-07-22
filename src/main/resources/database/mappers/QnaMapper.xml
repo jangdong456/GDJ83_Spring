@@ -42,23 +42,62 @@
 			)
 			WHERE R BETWEEN #{startRow} AND #{lastRow}	
 	</select>
+			
 
 	<insert id="add" parameterType="QnaDTO">
+		<selectKey order="BEFORE" resultType="Long" keyProperty="board_num">
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>	
 		INSERT INTO QNA
-		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE,
-		 '1', 0, BOARD_SEQ.CURRVAL, 0, 0, 0)
+		VALUES (#{board_num}, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE,
+		 '1', 0, #{board_num}, 0, 0, 0)
 	</insert> 
 	
-	<select id="detail" parameterType="QnaDTO" resultType="QnaDTO">
-		SELECT * FROM QNA
-		WHERE BOARD_NUM = #{board_num} AND DEL=0
+	<insert id="addFile" parameterType="BoardFileDTO">
+  		INSERT INTO QNAFILES 
+  		VALUES
+  		(FILES_SEQ.NEXTVAL, #{board_num}, #{filename}, #{oriname})	
+  	</insert>
+	
+	<select id="detail" parameterType="QnaDTO" resultMap="detailResult">
+		SELECT Q.*, QF.* 
+		FROM QNA Q
+			 LEFT JOIN
+			 QNAFILES QF 
+			 ON Q.BOARD_NUM = QF.BOARD_NUM
+		WHERE Q.BOARD_NUM= #{board_num}
 	</select>
 	
+	<resultMap type="QnaDTO" id="detailResult">
+  		<id column="BOARD_NUM" property="board_num"/>
+  		<result column="BOARD_WRITER" property="board_writer"/>
+  		<result column="BOARD_CONTENTS" property="board_contents"/>
+  		<result column="BOARD_TITLE" property="board_title"/>
+  		<result column="CREATE_DATE" property="create_date"/>
+  		<result column="UPDATE_DATE" property="update_date"/>
+  		<result column="BOARD_HIT" property="board_hit"/>
+  		<result column="BOARD_CATEGORY" property="board_category"/>
+  		<result column="REF" property="ref"/>
+  		<result column="STEP" property="step"/>
+  		<result column="DEPTH" property="depth"/>
+  		<result column="DEL" property="del"/>
+  		
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="filenum"/>
+  			<result column="FILENAME" property="filename"/>
+  			<result column="ORINAME" property="oriname"/>  		
+  		</collection>
+  	</resultMap>
+	
 	<insert id="reply" parameterType="QnaDTO">
+		<selectKey order="BEFORE" resultType="Long" keyProperty="board_num"> 
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+	
 		INSERT INTO QNA
 		VALUES 
 		(
-			BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE,
+			#{board_num}, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE,
 		 	'1', 0, #{ref}, #{step}, #{depth}
 		 )
 	</insert>

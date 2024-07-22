@@ -22,8 +22,10 @@
  		<typeAlias type="com.jang.app.boards.qna.QnaDTO" alias="QnaDTO"/> 
  		 		
  		<typeAlias type="com.jang.app.files.FileDTO" alias="FileDTO"/>  		
- 		<typeAlias type="com.jang.app.members.MemberFileDTO" alias="MemberFileDTO"/>		
- 		
+ 		<typeAlias type="com.jang.app.members.MemberFileDTO" alias="MemberFileDTO"/>
+ 		<typeAlias type="com.jang.app.product.ProductFileDTO" alias="ProductFileDTO"/>
+ 		<typeAlias type="com.jang.app.boards.BoardFileDTO" alias="BoardFileDTO"/>
+
  		<typeAlias type="com.jang.app.util.Pager" alias="Pager"/>
  		
  		

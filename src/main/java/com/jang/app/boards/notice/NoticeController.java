@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jang.app.boards.BoardDTO;
 import com.jang.app.members.MemberDTO;
@@ -52,13 +53,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add2(HttpSession session, NoticeDTO noticedto) throws Exception {
+	public String add2(HttpSession session, NoticeDTO noticedto, MultipartFile [] files) throws Exception {
 		System.out.println("===== Add2 Controller ====");
 		MemberDTO mId = (MemberDTO)session.getAttribute("member");		
 		noticedto.setBoard_writer(mId.getM_id());
 
 		String url = "commons/message";
-		int result = noticeService.add(noticedto);
+		int result = noticeService.add(noticedto, files, session);
 		
 		if(result>0) {
 			url = "redirect:./list";

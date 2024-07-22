@@ -10,7 +10,7 @@
 	
 	<mapper namespace ="com.jang.app.product.ProductDAO">
 		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
-		
+
 		<select id="getTotalCount" resultType="java.lang.Long" parameterType="Pager">
 			SELECT COUNT(PRODUCT_ID) FROM PRODUCT
 				<where> 
@@ -61,8 +61,31 @@
 		  select의 결과물이 어떤든 resultType는 DTO로 할것
 		-->
 		
-		<select id="detail" resultType="ProductDTO" parameterType="ProductDTO">
-			  SELECT * FROM PRODUCT WHERE PRODUCT_ID = #{product_id}
+		<select id="detail" resultMap="getDetailResult" parameterType="ProductDTO"> 
+			  SELECT P.*, PF.*
+			  FROM  PRODUCT P
+					LEFT JOIN 
+					PRODUCTFILES PF 
+					ON (P.PRODUCT_ID = PF.PRODUCT_ID)
+			  WHERE P.PRODUCT_ID = #{product_id}
+		</select>
+				
+		<resultMap type="ProductDTO" id="getDetailResult">
+			<id column="PRODUCT_ID" property="product_id"/>
+			<result column = "PRODUCT_TYPE" property="product_type"/>
+			<result column = "PRODUCT_RATE" property="product_rate"/>
+			<result column = "PRODUCT_DETAIL" property="product_detail"/>
+			<!-- (상품)1:N(파일) -->
+			<collection property="fileDTOs" javaType="List" ofType="ProductFileDTO">
+				<id column="FILENUM" property="filenum"/>
+				<result column ="PRODUCT_ID" property="product_id"/>
+				<result column="FILENAME" property="filename"/>
+				<result column="ORINAME" property="oriname"/>
+			</collection>	
+		</resultMap>
+
+		<select id="getNum" resultType="Integer">
+			SELECT BANK_SEQ.NEXTVAL FROM DUAL 
 		</select>
 		
 		<insert id = "add" parameterType="ProductDTO">
@@ -73,7 +96,12 @@
 			#{0}
 		 -->
 			INSERT INTO PRODUCT
-			VALUES(BANK_SEQ.NEXTVAL, #{product_type}, #{product_rate}, #{product_detail})
+			VALUES(#{product_id}, #{product_type}, #{product_rate}, #{product_detail})
+		</insert>
+		
+		<insert id="addFile" parameterType="ProductFileDTO">
+			INSERT INTO PRODUCTFILES
+			VALUES (FILES_SEQ.NEXTVAL, #{product_id}, #{filename}, #{oriname})
 		</insert>
 		
 		<delete id="delete" parameterType="ProductDTO">

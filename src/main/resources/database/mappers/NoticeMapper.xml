@@ -62,61 +62,45 @@
 <!-- 		WHERE MEMBERS.M_ID = #{m_id} -->
 <!-- 	</select> -->
 	
-	<select id="detail" parameterType="boardDTO" resultType="NoticeDTO">
-		SELECT * FROM NOTICE
-		WHERE BOARD_NUM = #{board_num}
+	<select id="detail" parameterType="NoticeDTO" resultMap="detailResult">
+		SELECT * 
+		FROM NOTICE N
+			 LEFT JOIN
+			 NOTICEFILES NF
+			 ON N.board_num = NF.board_num
+		WHERE N.BOARD_NUM = #{board_num}
 	</select>
-	
-	
+
 	<!--  누가 1이고 누가 N인지 살펴보기  -->
 	
-	<resultMap type="boardDTO" id="noticeList">
-
-<!-- 		<id column="M_ID" property="m_id"/> -->
-<!-- 		<result column = "MEMBER_NAME" property="member_name"/> -->
-<!-- 		<result column = "MEMBER_NUMBER" property="member_number"/> -->
-<!-- 		<result column = "PHONE" property="phone"/> -->
-<!-- 		<result column = "EMAIL" property="email"/> -->
-<!-- 		<result column = "MEMBER_ID" property="member_id"/> -->
-<!-- 		<result column = "MEMBER_PWD" property="member_pwd"/> -->
-		
-<!-- 		<collection property="dtos" javaType ="java.util.List" ofType="MemberDTO"> -->
-<!-- 			<id column="BOARD_NUM" property="board_num"/> -->
-<!-- 			<result column="M_ID" property="m_id"/> -->
-<!-- 			<result column="BOARD_TITLE" property="board_title"/> -->
-<!-- 			<result column="BOARD_CONTENTS" property="board_contents"/> -->
-<!-- 			<result column="CREATE_DATE" property="create_date"/> -->
-<!-- 			<result column="UPDATE_DATE" property="update_date"/> -->
-<!-- 			<result column="BOARD_CATEGORY" property="board_category"/> -->
-<!-- 			<result column="BOARD_HIT" property="board_hit"/> -->
-<!-- 		</collection> -->
-		
-		
-		<id column="BOARD_NUM" property="board_num"/>
-		<result column="M_ID" property="m_id"/>
-		<result column="BOARD_TITLE" property="board_title"/>
-		<result column="BOARD_CONTENTS" property="board_contents"/>
-		<result column="CREATE_DATE" property="create_date"/>
-		<result column="UPDATE_DATE" property="update_date"/>
-		<result column="BOARD_CATEGORY" property="board_category"/>
-		<result column="BOARD_HIT" property="board_hit"/>
-
-		<collection property="dtos" javaType ="java.util.List" ofType="MemberDTO">	
-			<id column="M_ID" property="m_id"/>
-			<result column = "MEMBER_NAME" property="member_name"/>
-			<result column = "MEMBER_NUMBER" property="member_number"/>
-			<result column = "PHONE" property="phone"/>
-			<result column = "EMAIL" property="email"/>
-			<result column = "MEMBER_ID" property="member_id"/>
-			<result column = "MEMBER_PWD" property="member_pwd"/>
-		</collection>		
-
-	</resultMap>
+  	<resultMap type="NoticeDTO" id="detailResult">
+  		<id column="BOARDNUM" property="board_num"/>
+  		<result column="BOARD_WRITER" property="board_writer"/>
+  		<result column="BOARD_CONTENTS" property="board_contents"/>
+  		<result column="BOARD_TITLE" property="board_title"/>
+  		<result column="CREATE_DATE" property="create_date"/>
+  		<result column="UPDATE_DATE" property="update_date"/>
+  		<result column="BOARD_HIT" property="board_hit"/>
+  		<result column="BOARD_CATEGORY" property="board_category"/>
+  		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+  			<id column="FILENUM" property="filenum"/>
+  			<result column="FILENAME" property="filename"/>
+  			<result column="ORINAME" property="oriname"/>  		
+  		</collection>
+  	</resultMap>
 	
 	<insert id="add" parameterType="boardDTO">
 		INSERT INTO NOTICE
 		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE, '1', 0)
 	</insert>
+	
+  	<insert id="addFile" parameterType="BoardFileDTO">
+ 		INSERT INTO NOTICEFILES	VALUES
+ 		(
+ 			FILES_SEQ.NEXTVAL,#{boardNum}, #{fileName}, #{oriName}
+ 		)	
+  	
+  	</insert>
 
 	<update id="update" parameterType="boardDTO">
 		UPDATE NOTICE SET BOARD_TITLE =#{board_title}, BOARD_CONTENTS =#{board_contents}

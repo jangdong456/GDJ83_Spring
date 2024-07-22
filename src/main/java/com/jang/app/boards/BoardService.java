@@ -2,6 +2,10 @@ package com.jang.app.boards;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.jang.app.util.Pager;
 
 public interface BoardService {
@@ -10,7 +14,7 @@ public interface BoardService {
 	public List<BoardDTO> list(Pager page) throws Exception;
 	
 	//add 
-	int add(BoardDTO boardDTO) throws Exception;
+	int add(BoardDTO boardDTO, MultipartFile [] multipartFiles, HttpSession session) throws Exception;
 	
 	//update
 	int update(BoardDTO boardDTO) throws Exception;

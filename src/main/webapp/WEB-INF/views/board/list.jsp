@@ -116,16 +116,18 @@
 	</nav>
 	
 	
-	<div>
-		
+	<div>	
 		<a href="add" class="btn btn-primary" role="button">글쓰기</a>
 	</div>
+	
+	
 
-
 	</div>
 	</div>
 	</div>
+	
 	<c:import url="/WEB-INF/views/templete/footerscript.jsp"></c:import>
+
 
 </body>
 </html>

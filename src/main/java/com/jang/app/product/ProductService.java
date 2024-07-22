@@ -2,9 +2,15 @@ package com.jang.app.product;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.jang.app.files.FileManager;
+import com.jang.app.members.MemberDAO;
 import com.jang.app.util.Pager;
 
 @Service
@@ -12,6 +18,12 @@ public class ProductService {
 	
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private MemberDAO memberDAO;
+	
+	@Autowired
+	private FileManager fileManager;
 		
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		System.out.println("======= Service ========");
@@ -26,13 +38,49 @@ public class ProductService {
 
 	}
 	
-	public ProductDTO detail(ProductDTO product_id) throws Exception {
+	public ProductDTO detail(ProductDTO productDTO) throws Exception {
 		System.out.println("detail 서비스");
-	  	return  productDAO.detail(product_id);
+	  	return  productDAO.detail(productDTO);
 	}
 	
-	public int add(ProductDTO productDTO) throws Exception {
-		return productDAO.add(productDTO);
+	public int add(ProductDTO productDTO, MultipartFile [] files, HttpSession session) throws Exception {
+		
+		Integer num = productDAO.getNum();
+		
+		productDTO.setProduct_id(num);
+		
+		int result = productDAO.add(productDTO);
+		
+		if(files == null) {
+			return result; 
+		}
+		
+		//1. 어디에 저장
+		ServletContext ServletContext = session.getServletContext();
+		String path = ServletContext.getRealPath("resources/upload/products/");
+		System.out.println(path);
+		
+		
+		//2. 저장할 파일명 만드는 방법
+		for(MultipartFile f : files) {
+			if(f.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.fileSave(path, f);
+			
+
+			//4.파일정보를 DB에 저장
+			ProductFileDTO productFileDTO = new ProductFileDTO();
+		
+			productFileDTO.setFilename(fileName);
+			productFileDTO.setOriname(f.getOriginalFilename());
+			productFileDTO.setProduct_id(num);
+			
+			result = productDAO.addFile(productFileDTO);
+		};
+		
+		return result;
 	}
 	
 	public int delete(ProductDTO productDTO) throws Exception {

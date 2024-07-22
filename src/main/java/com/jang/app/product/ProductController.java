@@ -2,11 +2,14 @@ package com.jang.app.product;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jang.app.util.Pager;
 
@@ -29,9 +32,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "detail", method= RequestMethod.GET)
-	public String detail(Model model, ProductDTO product_id) throws Exception {
-		
-		ProductDTO dto = productService.detail(product_id);
+	public String detail(Model model, ProductDTO productDTO) throws Exception {
+
+		ProductDTO dto = productService.detail(productDTO);
 
 		model.addAttribute("detail",dto);
 		String path = "product/detail";
@@ -45,9 +48,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add2(Model model, ProductDTO productDTO) throws Exception {
+	public String add2(Model model,ProductDTO productDTO, MultipartFile [] files, HttpSession session) throws Exception {
 		
-		int result = productService.add(productDTO);
+		int result = productService.add(productDTO, files, session);
 		
 		String url = "";
 		

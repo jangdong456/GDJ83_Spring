@@ -32,14 +32,23 @@ public class ProductDAO {
 		return sqlSession.selectOne(NAMESPACE + "getTotalCount", pager);
 	}
 	
-	public ProductDTO detail(ProductDTO product_id) throws Exception {
+	public ProductDTO detail(ProductDTO productDTO) throws Exception {
 		// selectOne : 조건값이 1나일때 
-		 return sqlSession.selectOne(NAMESPACE +"detail", product_id); 
+		 return sqlSession.selectOne(NAMESPACE +"detail", productDTO); 
+	}
+	
+	public Integer getNum() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getNum");
 	}
 	
 	public int add(ProductDTO productDTO) throws Exception {
 
 		return sqlSession.insert(NAMESPACE +"add",productDTO);
+	}
+	
+	public int addFile(ProductFileDTO productFileDTO) throws Exception {
+
+		return sqlSession.insert(NAMESPACE +"addFile",productFileDTO);
 	}
 	
 	public int delete(ProductDTO productDTO) throws Exception {
