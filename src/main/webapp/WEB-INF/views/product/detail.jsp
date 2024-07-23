@@ -47,16 +47,26 @@
 					</c:forEach>
 				</div>
 				
+				<div id="wishResult">
+
+
+				</div>
+
+
 				<div>
 					<a href ="../account/add?product_id=${detail.product_id}" class="btn btn-primary" role="button">상품가입</a>
 					<a href ="delete?product_id=${detail.product_id}" class="btn btn-primary" role="button">삭제</a>
 					<a href ="update?product_id=${detail.product_id}" class="btn btn-primary" role="button">수정</a>
+					<button id ="addWish" type=button class ="btn btn-primary" data-product-id="${detail.product_id}">관심목록추가</button>
+					
 				</div>        
             </div>
-        </div>
+       </div>
      </div>
 
 
+
+	<<script src="/resources/js/product/wish.js"></script>
 	<c:import url="/WEB-INF/views/templete/footerscript.jsp"></c:import>
 </body>
 </html>

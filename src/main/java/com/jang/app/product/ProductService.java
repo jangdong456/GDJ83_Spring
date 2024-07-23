@@ -1,6 +1,8 @@
 package com.jang.app.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jang.app.files.FileManager;
 import com.jang.app.members.MemberDAO;
+import com.jang.app.members.MemberDTO;
 import com.jang.app.util.Pager;
 
 @Service
@@ -24,6 +27,21 @@ public class ProductService {
 	
 	@Autowired
 	private FileManager fileManager;
+	
+	public List<ProductDTO> wishList(MemberDTO memberDTO)throws Exception {
+		return productDAO.wishList(memberDTO);
+	}
+	
+	public int addWish(Integer product_id, Integer m_id) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("product_id", product_id);
+		map.put("m_id", m_id);
+
+		int result = productDAO.addWish(map);
+		return result;
+	}
+	
 		
 	public List<ProductDTO> getList(Pager pager) throws Exception {
 		System.out.println("======= Service ========");

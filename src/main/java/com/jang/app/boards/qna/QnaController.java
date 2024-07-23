@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jang.app.boards.BoardDTO;
+import com.jang.app.files.FileDTO;
 import com.jang.app.members.MemberDTO;
 import com.jang.app.util.Pager;
 
@@ -103,6 +104,16 @@ public class QnaController {
 		int result = qnaService.reply(qnaDTO);
 		
 		return "redirect:./list";
+	}
+	
+	@GetMapping("fileDown")
+	public String fileDown(FileDTO fileDTO, Model model) throws Exception {
+//  	파일다운이라는 클래스를 만드려고 만든 메서드
+//		먼가 응답으로 보내지는 것들은 전부다 = 'view' 라고 불림
+//		하지만 여기에선 file을 찾아주는 애가 필요함 ---> 커스텀 view라고 불림
+		fileDTO = qnaService.fileDetail(fileDTO);
+		model.addAttribute("file", fileDTO);
+		return "fileDown";
 	}
 
 }

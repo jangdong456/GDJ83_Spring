@@ -50,31 +50,19 @@
 			)
 		WHERE R BETWEEN #{startRow} AND #{lastRow} 
 	</select>
-
-	
-<!-- 	<select id="list" parameterType="NoticeDTO" resultMap="noticeList"> -->
-<!-- 		SELECT *  -->
-<!-- 		FROM -->
-<!-- 			NOTICE -->
-<!-- 			INNER JOIN -->
-<!-- 			MEMBERS -->
-<!-- 			ON NOTICE.BOARD_WRITER = MEMBERS.M_ID -->
-<!-- 		WHERE MEMBERS.M_ID = #{m_id} -->
-<!-- 	</select> -->
 	
 	<select id="detail" parameterType="NoticeDTO" resultMap="detailResult">
 		SELECT * 
 		FROM NOTICE N
 			 LEFT JOIN
 			 NOTICEFILES NF
-			 ON N.board_num = NF.board_num
+			 ON N.BOARD_NUM = NF.BOARD_NUM
 		WHERE N.BOARD_NUM = #{board_num}
 	</select>
 
 	<!--  누가 1이고 누가 N인지 살펴보기  -->
-	
   	<resultMap type="NoticeDTO" id="detailResult">
-  		<id column="BOARDNUM" property="board_num"/>
+  		<id column="BOARD_NUM" property="board_num"/>
   		<result column="BOARD_WRITER" property="board_writer"/>
   		<result column="BOARD_CONTENTS" property="board_contents"/>
   		<result column="BOARD_TITLE" property="board_title"/>
@@ -89,7 +77,7 @@
   		</collection>
   	</resultMap>
 	
-	<insert id="add" parameterType="boardDTO">
+	<insert id="add" parameterType="NoticeDTO">
 		INSERT INTO NOTICE
 		VALUES (BOARD_SEQ.NEXTVAL, #{board_writer}, #{board_title}, #{board_contents}, SYSDATE, SYSDATE, '1', 0)
 	</insert>
@@ -97,7 +85,7 @@
   	<insert id="addFile" parameterType="BoardFileDTO">
  		INSERT INTO NOTICEFILES	VALUES
  		(
- 			FILES_SEQ.NEXTVAL,#{boardNum}, #{fileName}, #{oriName}
+ 			FILES_SEQ.NEXTVAL,#{board_num}, #{filename}, #{oriname}
  		)	
   	
   	</insert>

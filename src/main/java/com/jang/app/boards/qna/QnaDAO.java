@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jang.app.boards.BoardDAO;
 import com.jang.app.boards.BoardDTO;
 import com.jang.app.boards.BoardFileDTO;
+import com.jang.app.files.FileDTO;
 import com.jang.app.util.Pager;
 
 @Repository
@@ -73,5 +74,12 @@ public class QnaDAO implements BoardDAO {
 	public int replyUpdate(QnaDTO qnaDTO) throws Exception {
 		return sqlSession.update(NAMESPACE + "replyUpdate", qnaDTO);
 	}
+
+	@Override
+	public FileDTO fileDetail(FileDTO fileDTO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "fileDetail", fileDTO);
+	}
+	
+	
 	
 }

@@ -2,6 +2,7 @@ package com.jang.app.boards;
 
 import java.util.List;
 
+import com.jang.app.files.FileDTO;
 import com.jang.app.util.Pager;
 
 public interface BoardDAO {
@@ -28,4 +29,7 @@ public interface BoardDAO {
 	
 	//TotalCount
 	public Long getTotalCount(Pager pager) throws Exception;
+	
+	//filedetail
+	FileDTO fileDetail(FileDTO fileDTO) throws Exception;
 }

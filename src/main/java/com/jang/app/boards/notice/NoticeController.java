@@ -57,8 +57,10 @@ public class NoticeController {
 		System.out.println("===== Add2 Controller ====");
 		MemberDTO mId = (MemberDTO)session.getAttribute("member");		
 		noticedto.setBoard_writer(mId.getM_id());
-
+		System.out.println("@@@@@@@@@@@@@@@@@@@");
+		System.out.println(files);
 		String url = "commons/message";
+		
 		int result = noticeService.add(noticedto, files, session);
 		
 		if(result>0) {
