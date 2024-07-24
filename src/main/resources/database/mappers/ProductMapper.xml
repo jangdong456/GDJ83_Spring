@@ -11,6 +11,16 @@
 	<mapper namespace ="com.jang.app.product.ProductDAO">
 		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
 
+		<delete id="wishDelete" parameterType="AccountDTO">
+			DELETE WISHLIST WHERE M_ID = #{m_id} AND PRODUCT_ID IN
+			<foreach collection="ids" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+<!-- 			<foreach collection="array" item="item" open="(" separator="," close=")"> -->
+<!-- 				#{item} -->
+<!-- 			</foreach> -->
+		</delete>
+		
 		<select id="wishList" parameterType="MemberDTO" resultType="ProductDTO">
 			SELECT * FROM PRODUCT
 			WHERE PRODUCT_ID IN (

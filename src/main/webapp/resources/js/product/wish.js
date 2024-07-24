@@ -4,6 +4,7 @@ const whis = document.getElementById("addWish");
 const wishResult = document.getElementById("wishResult");
 
 
+
 //Arrow function 화살표 함수 -> 불필요한 함수 이름을 만들기 귀찮아서 / fetch함수에서 Arrow function을 많이 사용함
 // 쓰는법 () -> {}
 // 하지만 코드가 한줄이면 중괄호 {} 생략할 수 있다.

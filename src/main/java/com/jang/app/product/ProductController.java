@@ -21,6 +21,22 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+
+	@GetMapping("wishDelete")
+	public String wishDelete(Integer[] product_id, Model model, HttpSession session) throws Exception {
+		System.out.println("======wish delete======");
+		for(Integer bn:product_id) {
+			System.out.println(bn);
+		}
+	
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		
+		int result = productService.wishDelete(product_id, memberDTO.getM_id());
+
+		model.addAttribute("msg", result);
+		
+		return "commons/result";		   
+	}
 	
 	@GetMapping("wishList")
 	public void wishList(HttpSession session, Model model) throws Exception {

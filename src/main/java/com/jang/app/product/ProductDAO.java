@@ -24,6 +24,10 @@ public class ProductDAO {
 	private final String NAMESPACE= "com.jang.app.product.ProductDAO.";
 	
 	
+	public int wishDelete(Map<String, Object> map) throws Exception {
+		return sqlSession.delete(NAMESPACE + "wishDelete", map);
+	}
+	
 	public List<ProductDTO> wishList(MemberDTO memberDTO) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "wishList", memberDTO);
 	}

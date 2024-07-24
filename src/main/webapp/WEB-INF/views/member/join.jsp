@@ -58,7 +58,7 @@
 			  </div>
 			  <div class="mb-3">
 			    <label for="member_pwd" class="form-label">비밀번호</label>
-			    <input type="text" class="form-control" id="member_pwd" name="member_pwd">
+			    <input type="text" class="form-control" id="passwordCheck" name="member_pwd">
 			  </div>
 			  
 			  
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/templete/footerscript.jsp"></c:import>
-<!-- 	<script type="text/javascript" src="../resources/js/member/memberJoinCheck.js"></script> -->
+	<script type="text/javascript" src="../resources/js/member/memberJoinCheck.js"></script>
 	<script type="text/javascript" src="../resources/js/commons/files.js"></script>
 
 

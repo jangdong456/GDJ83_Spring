@@ -28,6 +28,24 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
+	
+	public int wishDelete(Integer[] product_id, Integer m_id) throws Exception {
+		
+		int result = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", m_id);
+		map.put("ids", product_id); //배열 자체를 보내는거 
+		result = productDAO.wishDelete(map);
+
+//		for(Integer bn: product_id) {
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("product_id", bn);
+//			map.put("m_id", m_id);
+//			result = productDAO.wishDelete(map);
+//		}
+		return result;
+	}
+	
 	public List<ProductDTO> wishList(MemberDTO memberDTO)throws Exception {
 		return productDAO.wishList(memberDTO);
 	}

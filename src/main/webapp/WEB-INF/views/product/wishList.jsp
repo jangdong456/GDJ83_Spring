@@ -16,11 +16,16 @@
         <div id="content">
             <c:import url="/WEB-INF/views/templete/topbar.jsp"></c:import>
             <div class="col-md-10 ms-10 mt-4">   
+                <div>
+                    <button id="deleteAll" class="btn btn-primary" >전체삭제</button>
+                </div>
+
+
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th>
-                                <input type="checkbox">
+                                <input id="checkAll" type="checkbox">
                             </th>
                             <th>번호</th>
                             <th>상품명</th>
@@ -33,7 +38,7 @@
                         <c:forEach items="${list}" var="map" varStatus="i">
                             <tr id="w${i.index}">
                                 <td>
-                                    <input type="checkbox">
+                                    <input class="checkEach" type="checkbox" data-wish-id="${map.product_id}" data-del-id="w${i.index}">
                                 </td>
                                 <td>${map.product_id}</td>
                                 <td>${map.product_type}</td>
@@ -41,7 +46,7 @@
                                 <td>${map.product_detail}</td>
                                 
                                 <td>
-                                    <button type="button" class="btn btn-primary wishDelte" data-del-id="w${i.index}" data-wish-id="${map.product_id}">X</button>
+                                    <button type="button" class="btn btn-primary wishDelete" data-del-id="w${i.index}" data-wish-id="${map.product_id}">X</button>
                                 </td>
                             </tr>
                         </c:forEach>		
