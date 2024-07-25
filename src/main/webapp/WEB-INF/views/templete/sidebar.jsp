@@ -14,9 +14,6 @@
             <hr class="sidebar-divider my-0">
 
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
                
@@ -32,7 +29,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                   
-                        <a class="collapse-item" href="product/list">products</a>
+                        <a class="collapse-item" href="/product/list">products</a>
                        
                     </div>
                 </div>
@@ -41,7 +38,7 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Board</span>
@@ -49,11 +46,11 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
- 		            <a class="collapse-item" href="member/mypage">마이페이지</a>                   
-					<a class="collapse-item" href="member/join">회원가입</a>
-	                <a class="collapse-item" href="member/login">로그인</a> 
-					<a class="collapse-item" href="notice/list">Notice</a>
-                    <a class="collapse-item" href="qna/list">QnA</a>
+ 		            <a class="collapse-item" href="/member/mypage">마이페이지</a>                   
+					<a class="collapse-item" href="/member/join">회원가입</a>
+	                <a class="collapse-item" href="/member/login">로그인</a> 
+					<a class="collapse-item" href="/notice/list">Notice</a>
+                    <a class="collapse-item" href="/qna/list">QnA</a>
                         
                     </div>
                 </div>

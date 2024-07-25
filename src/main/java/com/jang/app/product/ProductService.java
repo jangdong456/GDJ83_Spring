@@ -15,6 +15,7 @@ import com.jang.app.files.FileManager;
 import com.jang.app.members.MemberDAO;
 import com.jang.app.members.MemberDTO;
 import com.jang.app.util.Pager;
+import com.jang.app.util.ProductCommentPager;
 
 @Service
 public class ProductService {
@@ -28,6 +29,21 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public List<ProductCommentDTO> commentList(ProductCommentPager productCommentPager) throws Exception {
+		
+		productCommentPager.makerow();
+		productCommentPager.makeNum(productDAO.commentTotalCount(productCommentPager));
+		
+		return productDAO.commentList(productCommentPager); 
+	}
+	
+	public int commentDelte(Long board_num) throws Exception {
+		return productDAO.commentDelte(board_num);
+	}
+	
+	public int commentAdd(ProductCommentDTO productCommentDTO) throws Exception {
+		return productDAO.commentAdd(productCommentDTO);
+	}
 	
 	public int wishDelete(Integer[] product_id, Integer m_id) throws Exception {
 		

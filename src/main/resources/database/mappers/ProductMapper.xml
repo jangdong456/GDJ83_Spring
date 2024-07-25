@@ -10,7 +10,35 @@
 	
 	<mapper namespace ="com.jang.app.product.ProductDAO">
 		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
-
+		
+		<delete id="commentDelte" parameterType="ProductCommentDTO">
+			DELETE COMMENTS WHERE BOARD_NUM = #{board_num}
+		</delete>
+		
+		<select id="commentTotalCount" resultType="Long" parameterType="ProductCommentPager">
+			SELECT COUNT(BOARD_NUM) FROM COMMENTS
+			WHERE PRODUCT_ID = #{product_id}
+		</select>
+		
+		<select id="commentList" parameterType="ProductCommentPager" resultType="ProductCommentDTO">
+			SELECT * FROM
+			(
+				SELECT ROWNUM R, C.* FROM 	
+				(
+					SELECT * FROM COMMENTS
+					WHERE PRODUCT_ID = #{product_id}
+					ORDER BY BOARD_NUM DESC
+				)C
+			)
+			WHERE R BETWEEN #{startRow} AND #{lastRow}
+		</select>
+		
+		<insert id="commentAdd" parameterType="ProductCommentDTO">
+			INSERT INTO COMMENTS VALUES
+			(PRODUCT_SEQ.NEXTVAL, #{product_id}, #{board_writer}, #{board_contents}, SYSDATE)
+		</insert>
+		
+		
 		<delete id="wishDelete" parameterType="AccountDTO">
 			DELETE WISHLIST WHERE M_ID = #{m_id} AND PRODUCT_ID IN
 			<foreach collection="ids" item="item" open="(" separator="," close=")">

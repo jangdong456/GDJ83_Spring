@@ -27,7 +27,10 @@
  		<typeAlias type="com.jang.app.boards.BoardFileDTO" alias="BoardFileDTO"/>
 
  		<typeAlias type="com.jang.app.util.Pager" alias="Pager"/>
+ 		<typeAlias type="com.jang.app.product.ProductCommentDTO" alias="ProductCommentDTO"/>
  		
+ 		<typeAlias type="com.jang.app.boards.CommentDTO" alias="CommentDTO"/>
+ 		<typeAlias type="com.jang.app.util.ProductCommentPager" alias="ProductCommentPager"/>
  		
  	</typeAliases>
  </configuration>

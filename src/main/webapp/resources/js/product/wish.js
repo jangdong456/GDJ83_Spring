@@ -36,11 +36,3 @@ whis.addEventListener("click", (e)=>{
         alert("오류발생");
     })
 });
-
-
-// whis.addEventListener("click", function(){
-//     fetch("./addWish?num=15&name=aa", {
-//         method: "GET"
-       
-//     });
-// });
