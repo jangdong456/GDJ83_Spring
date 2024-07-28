@@ -29,6 +29,10 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public int commentUpdate(ProductCommentDTO productCommentDTO) throws Exception {
+		return productDAO.commentUpdate(productCommentDTO);
+	}
+	
 	public List<ProductCommentDTO> commentList(ProductCommentPager productCommentPager) throws Exception {
 		
 		productCommentPager.makerow();

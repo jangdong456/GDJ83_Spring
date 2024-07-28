@@ -24,6 +24,17 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@PostMapping("commentUpdate")
+	public String commentUpdate(ProductCommentDTO productCommentDTO, Model model) throws Exception {
+		System.out.println("== 댓글 수정 ==");
+		System.out.println(productCommentDTO.getBoard_num());
+		System.out.println(productCommentDTO.getBoard_contents());
+		int result = productService.commentUpdate(productCommentDTO);
+		System.out.println("결과값 : "+result);
+		model.addAttribute("msg", result);
+		
+		return "commons/result";
+	}
 
 	@PostMapping("commentDelte")
 	public String commentDelte(Long board_num, Model model) throws Exception {

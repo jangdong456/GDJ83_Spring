@@ -8,8 +8,8 @@ public class ProductDTO {
 	private String product_type;
 	private double product_rate;
 	private String product_detail;
-	private List<ProductFileDTO> fileDTOs;
-
+	private List<ProductFileDTO> fileDTOs; 
+	
 	public List<ProductFileDTO> getFileDTOs() {
 		return fileDTOs;
 	}

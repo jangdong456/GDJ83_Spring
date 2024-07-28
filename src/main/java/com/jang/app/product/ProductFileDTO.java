@@ -5,7 +5,8 @@ import com.jang.app.files.FileDTO;
 public class ProductFileDTO extends FileDTO {
 	
 	private Integer product_id;
-
+	
+	
 	public Integer getProduct_id() {
 		return product_id;
 	}

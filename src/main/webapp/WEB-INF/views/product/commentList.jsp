@@ -4,13 +4,15 @@
 
 <table>
     <tbody>
-        <c:forEach items="${list}" var="comment">
+        <c:forEach items="${list}" var="comment" varStatus="i">
             <tr>
-                <td>${comment.board_contents}</td>
+                <td id="con${i.index}">${comment.board_contents}</td>
                 <td>${comment.board_writer}</td>
                 <td>${comment.create_date}</td>
                 <td><c:if test="${comment.board_writer eq member.m_id}"><button class="commentDel cd" type="button" deta-delete-btn="${comment.board_num}">X</button></c:if></td>
+                <td><c:if test="${comment.board_writer eq member.m_id}"><button class="commentDel ups" type="button" data-update-con="con${i.index}" deta-delete-btn="${comment.board_num}" data-toggle="modal" data-target="#commentModal">수정</button></c:if></td>
             </tr>
+            
         </c:forEach>
     </tbody>
 </table>

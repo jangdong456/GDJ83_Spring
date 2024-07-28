@@ -25,6 +25,10 @@ public class ProductDAO {
 	private final String NAMESPACE= "com.jang.app.product.ProductDAO.";
 	
 	
+	public int commentUpdate(ProductCommentDTO productCommentDTO) throws Exception {
+		return sqlSession.update(NAMESPACE + "commentUpdate", productCommentDTO);
+	}
+	
 	public int commentDelte(Long board_num) throws Exception {
 		return sqlSession.delete(NAMESPACE + "commentDelte", board_num);
 	}

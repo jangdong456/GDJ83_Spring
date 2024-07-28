@@ -9,7 +9,13 @@
 	<!--  namespace 다른애랑 중복되면 안되니까 명시해준다 -->
 	
 	<mapper namespace ="com.jang.app.product.ProductDAO">
+						
 		<!--  id= 연결한 DAO 메서드명과 동일하게 작성 -->
+		
+		<update id="commentUpdate" parameterType="ProductCommentDTO">
+			UPDATE COMMENTS SET BOARD_CONTENTS = #{board_contents}
+			WHERE BOARD_NUM = #{board_num}
+		</update>
 		
 		<delete id="commentDelte" parameterType="ProductCommentDTO">
 			DELETE COMMENTS WHERE BOARD_NUM = #{board_num}

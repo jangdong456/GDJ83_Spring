@@ -49,7 +49,7 @@
 
 					
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
+					<button type="button" id="openModal" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
 						댓글입력
 					</button>
 					
